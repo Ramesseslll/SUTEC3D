@@ -18,7 +18,7 @@ dep($data);
     <p><?php  echo $data['page_content']?></p>
     </section>
     
-    <?php echo base_url(); ?>
+    <?php echo passGenerator(); ?>
 
 </body>
 </html>
