@@ -1,7 +1,10 @@
 <?php
 
+//Linea para convertir la primera letra de los controladores en mayuscula
+$controller = ucwords($controller);
 //Load
 $controllerfile= "Controllers/" .$controller. ".php";
+ 
 if(file_exists($controllerfile))
 {
     require_once($controllerfile);

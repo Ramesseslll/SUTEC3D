@@ -5,6 +5,10 @@ function base_url()
     
     return BASE_URL; 
 }
+//Funcion para jalar el contenido de la url de la carpeta Assets                                          
+function media(){
+   return BASE_URL. "Assets/";
+}
 
 function dep($data)
 {
@@ -67,5 +71,23 @@ function passGenerator($Length = 10)
    return $pass;
 
 }
+//Genera  un token
+
+function token(){
+
+   $r1 = bin2hex(random_bytes(10));
+   $r2 = bin2hex(random_bytes(10));
+   $r3 = bin2hex(random_bytes(10));
+   $r4 = bin2hex(random_bytes(10));
+   $token = $r1. '-' .$r2. '-' .$r3. '-' .$r4;
+   return $token; 
+}
+//Formato para valores monetarios
+function formatMoney($cantidad){
+
+   $cantidad = number_format($cantidad,2,SPD,SPM);
+   return $cantidad;
+}
+
 
 ?>
