@@ -1,6 +1,7 @@
 <?php
 
 require_once("Config/Config.php");
+require_once("Helpers/Helpers.php");
 
 $url = !empty($_GET['url']) ? $_GET['url'] : 'home/home';
 $arrUrl = explode("/",$url);
@@ -31,35 +32,8 @@ if(!empty($arrUrl[2]))
 }
 
 
-spl_autoload_register(function($class)
-{
-if(file_exists(LIBS.'Core/'.$class.".php")){
-    require_once(LIBS.'Core/'.$class.".php");
-}
-});
+require_once("Libraries/Core/Autoload.php");
+require_once("Libraries/Core/Load.php");
 
-//Load
-$controllerfile= "Controllers/" .$controller. ".php";
-if(file_exists($controllerfile))
-{
-    require_once($controllerfile);
-    $controller = new $controller();
-    if(method_exists($controller, $method))
-{
-    $controller->{$method}($params);
-}  else{
-    echo "No existe el metodo";
-}
-} else  {
-    echo "No existe controlador";
-}
 
-/*
-echo "<br>";
-echo "controlador: ".$controller;
-echo "<br>";
-echo " Metodo: " .$method;
-echo "<br>";
-echo " parametros: " .$params;
-*/
 ?>
