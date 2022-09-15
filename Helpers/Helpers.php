@@ -10,7 +10,18 @@ function media(){
    return BASE_URL. "/Assets";
 }
 
+//funciones para mandar a traer los includes
 
+function headerAdmin($data=""){
+
+   $view_header = "Views/includes/head_admin.php";
+   require_once ($view_header);
+}
+function footer_admin($data=""){
+
+   $view_footer = "Views/includes/footer_admin.php";
+   require_once ($view_footer);
+}
 //Funcion para debuguear-muestra informacion formateada
 function dep($data)
 {
