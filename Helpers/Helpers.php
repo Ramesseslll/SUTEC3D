@@ -7,9 +7,11 @@ function base_url()
 }
 //Funcion para jalar el contenido de la url de la carpeta Assets                                          
 function media(){
-   return BASE_URL. "Assets/";
+   return BASE_URL. "/Assets";
 }
 
+
+//Funcion para debuguear-muestra informacion formateada
 function dep($data)
 {
     
