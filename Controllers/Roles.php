@@ -15,7 +15,12 @@
             $this->views->getView($this, "roles", $data); // se coloca el nombre de la vista
         }
 
-        
+        public function getRoles()
+        {
+            $arrData = $this->model->selectRoles();
+            echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
+            die();
+        }
     }
 
 ?>

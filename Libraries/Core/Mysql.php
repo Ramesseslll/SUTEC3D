@@ -36,7 +36,7 @@
 			
 		}
 
-        public function selectAll(string $query)
+        public function select_all(string $query)
 		{
             $this->strquery = $query;
             $result = $this->conexion->prepare($this->strquery);
