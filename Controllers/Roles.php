@@ -55,6 +55,9 @@
             echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
             die();
         }
+        public function setRol(){
+            dep($_POST);
+        }   
     }
 
 ?>
