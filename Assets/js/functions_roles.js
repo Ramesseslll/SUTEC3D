@@ -5,21 +5,22 @@ document.addEventListener('DOMContentLoaded',function(){
        "aProcessing":true,
        "aServerSide":true,
        "language":{
-        "url":"//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+        "url":"//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json" //configura el legunaje español en la tabla
     },
         "ajax":{ 
             "url":" "+base_url+"/Roles/getRoles",
             "dataSrc":""
         },
-       "columns": [
+       "columns": [  // Se obtiene informacion de las columnas de la base de datos 
             { data: 'idrol' },
             { data: 'nombrerol' },
             { data: 'descripcion' },
-            { data: 'status' }
+            { data: 'status' },
+            { data: 'options' } // Muestra el contenido la columna actions en la vista roles
         ],
         "resonsieve":"true",
         "bDestroy":true,
-        "iDisplayLength":10,
+        "iDisplayLength":10, //se colocan el numero de registros
         "order":[[0,"desc"]]
     });
 });

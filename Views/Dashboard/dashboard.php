@@ -5,7 +5,7 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-dashboard"></i><?= $data['page_title']?></h1>
+          <h1><i class="fa fa-dashboard"></i><?= $data['page_title']?></h1> <!-- Muestra el titutlo de la pagina en el dashboard-->
           
         </div>
         <ul class="app-breadcrumb breadcrumb">

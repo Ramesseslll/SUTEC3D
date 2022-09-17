@@ -4,17 +4,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1"><!-- linea encargada de hacer la pagina responsiva-->
     <meta name="author" content="Pagina  creada por: Victor Perez; Andres Flores; Eden Flores">
-    <meta name="theme_color" content="#009688"> <!-- color del navbar-->
-    <link rel="shortcut icon" href="<?= media();?>/images/uploads/sutec_logo2.ico";
+    <meta name="theme_color" content="009688"> <!-- color del navbar-->
+    <link rel="shortcut icon" href="<?= media(); ?>/images/uploads/sutec-logo2.png">
 
-    <title> <?= $data['tag_page']?></title>
+    <title> <?= $data['tag_page']?></title> <!-- Nombre de la pestaña -->
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/main.css">
     <link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/style.css">
   </head>
   <body class="app sidebar-mini">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="<?= base_url(); ?>/dashboard">SUTEC3D</a>
+    <header class="app-header"><a class="app-header__logo" href="<?= base_url(); ?>/dashboard">SUTEC 3D</a>
       <!-- Sidebar toggle button-->
       <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
