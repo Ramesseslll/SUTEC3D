@@ -1,15 +1,17 @@
 <?php 
 
-	//Retorla la url del proyecto
+//ReGRESA A la url del proyecto
 	function base_url()
 	{
 		return BASE_URL;
 	}
-    //Retorla la url de Assets
+//Funcion para jalar el contenido de la url de la carpeta 
     function media()
     {
         return BASE_URL."/Assets";
     }
+
+//funciones para mandar a traer los includes
     function headerAdmin($data="")
     {
         $view_header = "Views/Template/header_admin.php";
@@ -20,7 +22,9 @@
         $view_footer = "Views/Template/footer_admin.php";
         require_once ($view_footer);        
     }
-	//Muestra información formateada
+
+//Funcion para debuguear-muestra informacion formateada
+
 	function dep($data)
     {
         $format  = print_r('<pre>');

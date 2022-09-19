@@ -12,7 +12,7 @@
 			$data['page_tag'] = "Dashboard - Tienda Virtual";
 			$data['page_title'] = "Dashboard - Tienda Virtual";
 			$data['page_name'] = "dashboard";
-			$this->views->getView($this,"dashboard",$data);
+			$this->views->getView($this,"dashboard",$data); // se coloca el nombre de la vista
 		}
 
 	}

@@ -1,10 +1,10 @@
 <?php 
 	
-	//define("BASE_URL", "http://localhost/tienda_virtual/");
+	//define("BASE_URL", "http://localhost/sutec3d/");
 	const BASE_URL = "http://localhost/SUTEC3D";
 
 	//Zona horaria
-	date_default_timezone_set('America/Guatemala');
+	date_default_timezone_set('America/Mexico_City');
 
 	//Datos de conexión a Base de Datos
 	const DB_HOST = "localhost";

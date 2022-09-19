@@ -9,10 +9,10 @@
 		public function Roles()
 		{
 			$data['page_id'] = 3;
-			$data['page_tag'] = "Roles Usuario";
+			$data['page_tag'] = "Roles Usuario"; //Se coloca el nombre de la pestaña
 			$data['page_name'] = "rol_usuario";
-			$data['page_title'] = "Roles Usuario <small> Tienda Virtual</small>";
-			$this->views->getView($this,"roles",$data);
+			$data['page_title'] = "Roles Usuario <small> SUTEC3D</small>"; // NOmbre de la pagian de abajo
+			$this->views->getView($this,"roles",$data); // se coloca el nombre de la vista
 		}
 
 		public function getRoles()
@@ -23,10 +23,12 @@
 
 				if($arrData[$i]['status'] == 1)
 				{
-					$arrData[$i]['status'] = '<span class="badge badge-success">Activo</span>';
+					$arrData[$i]['status'] = '<span class="badge badge-success">Activo</span>'; //Muestra el Status ACTIVO de roles
 				}else{
 					$arrData[$i]['status'] = '<span class="badge badge-danger">Inactivo</span>';
 				}
+
+				//Muestra la columna de Actions y Su (options)
 
 				$arrData[$i]['options'] = '<div class="text-center">
 				<button class="btn btn-secondary btn-sm btnPermisosRol" rl="'.$arrData[$i]['idrol'].'" title="Permisos"><i class="fas fa-key"></i></button>
