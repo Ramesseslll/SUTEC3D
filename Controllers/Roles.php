@@ -15,6 +15,7 @@
 			$this->views->getView($this,"roles",$data); // se coloca el nombre de la vista
 		}
 
+//Extraer todos los roles
 		public function getRoles()
 		{
 			$arrData = $this->model->selectRoles();
@@ -40,6 +41,8 @@
 			die();
 		}
 
+
+//extraer un rol
 		public function getRol(int $idrol)
 		{
 			$intIdrol = intval(strClean($idrol));
@@ -57,6 +60,7 @@
 			die();
 		}
 
+//crear roles
 		public function setRol(){
 			
 			$intIdrol = intval($_POST['idRol']);

@@ -17,13 +17,13 @@
 	display: none;
 }
 .headerRegister{
-	background: #009688;
+	background: #009688; /* COLOR DE roles NUEVO*/
 	color: #FFF;
 }
 .headerUpdate{
-	background: #007bff;
+	background: #007bff; /* COLOR DE ACTUALIZAR ROLES */
 	color: #FFF;
 }
-.notBlock{
+.notBlock{  /* linea para no mostrar las opciones de inactivo y activo en ROLES */
 	display: none;
 }

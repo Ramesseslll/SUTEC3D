@@ -72,14 +72,16 @@ document.addEventListener('DOMContentLoaded', function(){
 
 $('#tableRoles').DataTable();
 
+//cambia los colores de el formulario
 function openModal(){
 
     document.querySelector('#idRol').value ="";
-    document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
+    document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister"); //cambia la clase para los formularios
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
     document.querySelector('#btnText').innerHTML ="Guardar";
     document.querySelector('#titleModal').innerHTML = "Nuevo Rol";
     document.querySelector("#formRol").reset();
+    
 	$('#modalFormRol').modal('show');
 }
 
@@ -89,15 +91,16 @@ window.addEventListener('load', function() {
     fntPermisos();
 }, false);
 
+//Editar roles
 function fntEditRol(){
     var btnEditRol = document.querySelectorAll(".btnEditRol");
     btnEditRol.forEach(function(btnEditRol) {
         btnEditRol.addEventListener('click', function(){
 
-            document.querySelector('#titleModal').innerHTML ="Actualizar Rol";
-            document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
-            document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
-            document.querySelector('#btnText').innerHTML ="Actualizar";
+            document.querySelector('#titleModal').innerHTML ="Actualizar Rol"; //cambiar texto al formulario a actualizar
+            document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate"); //remplazar las clases para el formulario
+            document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info"); //cambia la clase del boton de primari a info
+            document.querySelector('#btnText').innerHTML ="Actualizar"; //con inner cambia a actualizar
 
             var idrol = this.getAttribute("rl");
             var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
