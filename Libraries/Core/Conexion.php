@@ -1,13 +1,11 @@
 <?php
 class Conexion{
-	
 	private $conect;
 
 	public function __construct(){
-		$connectionString = "mysql:host=".BD_HOST.";dbname=".BD_NAME."; .BD_CHARSET.";
+		$connectionString = "mysql:host=".DB_HOST.";dbname=".DB_NAME.";.DB_CHARSET.";
 		try{
-		    
-			$this->conect = new PDO($connectionString, BD_USER, BD_PASSWORD);
+			$this->conect = new PDO($connectionString, DB_USER, DB_PASSWORD);
 			$this->conect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		    //echo "conexión exitosa";
 		}catch(PDOException $e){

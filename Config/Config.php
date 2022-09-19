@@ -1,22 +1,26 @@
-<?php
-//define("BASE_URL", "http://localhost/sUTEC3D/");
-const BASE_URL = "http://localhost/sUTEC3D/";
+<?php 
+	
+	//define("BASE_URL", "http://localhost/tienda_virtual/");
+	const BASE_URL = "http://localhost/SUTEC3D";
 
-//ZONA HORARIA 
+	//Zona horaria
+	date_default_timezone_set('America/Guatemala');
 
-date_default_timezone_set('America/Mexico_City');
+	//Datos de conexión a Base de Datos
+	const DB_HOST = "localhost";
+	const DB_NAME = "sutec";
+	const DB_USER = "root";
+	const DB_PASSWORD = "";
+	const DB_CHARSET = "charset=utf8";
 
-const BD_HOST = "localhost";
-const BD_NAME = "sutec";
-const BD_USER = "root";
-const BD_PASSWORD = "";
-const BD_CHARSET = "charset=utf8";
+	//Deliminadores decimal y millar Ej. 24,1989.00
+	const SPD = ".";
+	const SPM = ",";
 
-//DELIMITADORES DECIMAL Y MILLAR EJEMP. $4,896.00
-const SPD = ".";
-const SPM = ",";
+	//Simbolo de moneda
+	const SMONEY = "Q";
 
-//simbolo de modena 
-const SMONEY = "$";
+	
 
-?>
+
+ ?>
