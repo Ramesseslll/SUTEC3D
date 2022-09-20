@@ -29,6 +29,7 @@
 			return $request;
 		}
 
+
 		public function deletePermisos(int $idrol)
 		{
 			$this->intRolid = $idrol;
@@ -44,7 +45,7 @@
 			$this->w = $w;
 			$this->u = $u;
 			$this->d = $d;
-			$query_insert  = "INSERT INTO permisos(rolid,moduloid,r,w,u,d) VALUES(?,?,?,?,?,?)";
+			$query_insert  = "INSERT INTO permisos(rolid,moduloid,r,w,u,d) VALUES(?,?,?,?,?,?)"; //se especifica la cantidad e registros
         	$arrData = array($this->intRolid, $this->intModuloid, $this->r, $this->w, $this->u, $this->d);
         	$request_insert = $this->insert($query_insert,$arrData);		
 	        return $request_insert;

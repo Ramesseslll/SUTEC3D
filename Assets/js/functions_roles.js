@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     $('#modalFormRol').modal("hide");
                     formRol.reset();
                     swal("Roles de usuario", objData.msg ,"success");
-                    tableRoles.api().ajax.reload(function(){ 
+                    tableRoles.api().ajax.reload(function(){ //recarga las funciones al momento de crear un uasuar
                         fntEditRol();
                         fntDelRol();
                         fntPermisos();
@@ -85,11 +85,13 @@ function openModal(){
 	$('#modalFormRol').modal('show');
 }
 
+//Ejecutar las funciones
 window.addEventListener('load', function() {
     fntEditRol();
     fntDelRol();
     fntPermisos();
 }, false);
+
 
 //Editar roles
 function fntEditRol(){
@@ -170,7 +172,7 @@ function fntDelRol(){
                             if(objData.status)
                             {
                                 swal("Eliminar!", objData.msg , "success");
-                                tableRoles.api().ajax.reload(function(){
+                                tableRoles.api().ajax.reload(function(){ //volver ingresar cuando se recarga
                                     fntEditRol();
                                     fntDelRol();
                                     fntPermisos();
@@ -188,6 +190,7 @@ function fntDelRol(){
     });
 }
 
+//Permisos
 function fntPermisos(){
     var btnPermisosRol = document.querySelectorAll(".btnPermisosRol");
     btnPermisosRol.forEach(function(btnPermisosRol) {
