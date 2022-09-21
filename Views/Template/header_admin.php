@@ -2,11 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="description" content="Tienda Virtual Abel OSH">
+    <meta name="description" content="SUTEC 3D">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Abel OSH">
-    <meta name="theme-color" content="#009688">
+    <meta name="author" content="Victor Perez; EdenFlores; Andres Flores">
+    <meta name="theme-color" content="#2a6e78">
     <link rel="shortcut icon" href="<?= media();?>/images/sutec-logo2.ico">
     <title><?= $data['page_tag'] ?></title>
     <!-- Main CSS-->
@@ -16,7 +16,7 @@
   </head>
   <body class="app sidebar-mini">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="<?= base_url(); ?>/dashboard">SUTECD 3D</a>
+    <header class="app-header"><a class="app-header__logo" href="<?= base_url(); ?>/dashboard">SUTEC 3D</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"><i class="fas fa-bars"></i></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -25,7 +25,7 @@
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             <li><a class="dropdown-item" href="<?= base_url(); ?>/opciones"><i class="fa fa-cog fa-lg"></i> Configuracion</a></li>
             <li><a class="dropdown-item" href="<?= base_url(); ?>/perfil"><i class="fa fa-user fa-lg"></i> Perfil</a></li>
-            <li><a class="dropdown-item" href="<?= base_url(); ?>/logout"><i class="fa fa-sign-out fa-lg"></i>  Cerrar sesion</a></li>
+            <li><a class="dropdown-item" href="<?= base_url(); ?>/logout"><i class="fa fa-sign-out fa-lg"></i> Cerrar sesion</a></li>
           </ul>
         </li>
       </ul>

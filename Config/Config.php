@@ -1,7 +1,7 @@
 <?php 
 	
 	//define("BASE_URL", "http://localhost/tienda_virtual/");
-	const BASE_URL = "http://localhost/SUTEC3D";
+	const BASE_URL = "http://localhost/SUTEC3D/";
 
 	//Zona horaria
 	date_default_timezone_set('America/Mexico_City');
@@ -18,7 +18,7 @@
 	const SPM = ",";
 
 	//Simbolo de moneda
-	const SMONEY = "Q";
+	const SMONEY = "$";
 
 	
 
