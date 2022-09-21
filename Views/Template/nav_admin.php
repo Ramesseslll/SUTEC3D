@@ -16,7 +16,7 @@
         </li>
         <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview">
-                <i class="app-menu__icon fa fa-laptop" aria-hidden="true"></i>
+            <i class="app-menu__icon fa fa-laptop" aria-hidden="true"></i>
                 <span class="app-menu__label">Panel administrativo</span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
@@ -47,7 +47,7 @@
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/logout">
                 <i class="app-menu__icon fa fa-sign-out" aria-hidden="true"></i>
-                <span class="app-menu__label">Cerrar sesion</span>
+                <span class="app-menu__label">Logout</span>
             </a>
         </li>
       </ul>

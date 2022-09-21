@@ -11,6 +11,7 @@
     <title><?= $data['page_tag'] ?></title>
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/main.css">
+    <link rel="stylesheet" type="text/css" href="<?= media();?>/css/bootstrap-select.min.css"> 
     <link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/style.css">
   </head>
   <body class="app sidebar-mini">
@@ -24,7 +25,7 @@
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             <li><a class="dropdown-item" href="<?= base_url(); ?>/opciones"><i class="fa fa-cog fa-lg"></i> Configuracion</a></li>
             <li><a class="dropdown-item" href="<?= base_url(); ?>/perfil"><i class="fa fa-user fa-lg"></i> Perfil</a></li>
-            <li><a class="dropdown-item" href="<?= base_url(); ?>/logout"><i class="fa fa-sign-out fa-lg"></i> Cerrar sesion</a></li>
+            <li><a class="dropdown-item" href="<?= base_url(); ?>/logout"><i class="fa fa-sign-out fa-lg"></i>  Cerrar sesion</a></li>
           </ul>
         </li>
       </ul>

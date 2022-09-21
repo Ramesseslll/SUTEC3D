@@ -2,7 +2,7 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-sharp fa-solid fa-solar-panel"></i> <?= $data['page_title'] ?></h1> <!-- Muestra el titutlo de la pagina en el dashboard / Poner un fa antes para el icono-->
+          <h1><i class="fa fa-dashboard"></i><?= $data['page_title'] ?></h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>

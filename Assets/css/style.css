@@ -16,14 +16,14 @@
 .app-sidebar__toggle::before{
 	display: none;
 }
-.headerRegister{
-	background: #009688; /* COLOR DE roles NUEVO*/
+.headerRegister, .header-primary{
+	background: #009688;
 	color: #FFF;
 }
 .headerUpdate{
-	background: #007bff; /* COLOR DE ACTUALIZAR ROLES */
+	background: #007bff;
 	color: #FFF;
 }
-.notBlock{  /* linea para no mostrar las opciones de inactivo y activo en ROLES */
+.notBlock{
 	display: none;
 }

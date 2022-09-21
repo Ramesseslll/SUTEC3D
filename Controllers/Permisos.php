@@ -13,7 +13,7 @@
 			{
 				$arrModulos = $this->model->selectModulos();
 				$arrPermisosRol = $this->model->selectPermisosRol($rolid);
-				$arrPermisos = array('r' => 0, 'w' => 0, 'u' => 0, 'd' => 0); //parametros para los permisos
+				$arrPermisos = array('r' => 0, 'w' => 0, 'u' => 0, 'd' => 0);
 				$arrPermisoRol = array('idrol' => $rolid );
 
 				if(empty($arrPermisosRol))
@@ -48,12 +48,12 @@
 		{
 			if($_POST)
 			{
-				$intIdrol = intval($_POST['idrol']); //covertir a enteros
+				$intIdrol = intval($_POST['idrol']);
 				$modulos = $_POST['modulos'];
 
-				$this->model->deletePermisos($intIdrol); 
+				$this->model->deletePermisos($intIdrol);
 				foreach ($modulos as $modulo) {
-					$idModulo = $modulo['idmodulo']; //validar si esta on o off
+					$idModulo = $modulo['idmodulo'];
 					$r = empty($modulo['r']) ? 0 : 1;
 					$w = empty($modulo['w']) ? 0 : 1;
 					$u = empty($modulo['u']) ? 0 : 1;
