@@ -80,9 +80,9 @@ function openModal(){
 }
 
 window.addEventListener('load', function() {
-    /*fntEditRol();
-    fntDelRol();
-    fntPermisos();*/
+    fntEditRol();
+   // fntDelRol();
+    //fntPermisos();
 }, false);
 
 function fntEditRol(idrol){
@@ -127,47 +127,53 @@ function fntEditRol(idrol){
 
 }
 
+
+
 function fntDelRol(idrol){
-    var idrol = idrol;
-    swal({
-        title: "Eliminar Rol",
-        text: "¿Realmente quiere eliminar el Rol?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Si, eliminar!",
-        cancelButtonText: "No, cancelar!",
-        closeOnConfirm: false,
-        closeOnCancel: true
-    }, function(isConfirm) {
-        
-        if (isConfirm) 
-        {
-            var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            var ajaxUrl = base_url+'/Roles/delRol/';
-            var strData = "idrol="+idrol;
-            request.open("POST",ajaxUrl,true);
-            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            request.send(strData);
-            request.onreadystatechange = function(){
-                if(request.readyState == 4 && request.status == 200){
-                    var objData = JSON.parse(request.responseText);
-                    if(objData.status)
-                    {
-                        swal("Eliminar!", objData.msg , "success");
-                        tableRoles.api().ajax.reload(function(){
-                            fntEditRol();
-                            fntDelRol();
-                            fntPermisos();
-                        });
-                    }else{
-                        swal("Atención!", objData.msg , "error");
+    
+            var idrol = idrol;
+           
+            swal({
+                title: "Eliminar Rol",
+                text: "¿Realmente quiere eliminar el Rol?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Si, eliminar!",
+                cancelButtonText: "No, cancelar!",
+                closeOnConfirm: false,
+                closeOnCancel: true
+            }, function(isConfirm) {
+                
+                if (isConfirm) 
+                {
+                    var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+                    var ajaxUrl = base_url+'/Roles/delRol/';
+                    var strData = "idrol="+idrol;
+                    request.open("POST",ajaxUrl,true);
+                    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    request.send(strData);
+                    request.onreadystatechange = function(){
+                        if(request.readyState == 4 && request.status == 200){
+                            var objData = JSON.parse(request.responseText);
+                            if(objData.status)
+                            {
+                                swal("Eliminar!", objData.msg , "success");
+                                tableRoles.api().ajax.reload(function(){
+                                    fntEditRol();
+                                   // fntDelRol();
+                                    //fntPermisos();
+                                });
+                            }else{
+                                swal("Atención!", objData.msg , "error");
+                            }
+                        }
                     }
                 }
-            }
+        
+            });
         }
 
-    });
-}
+
 
 function fntPermisos(idrol){
     var idrol = idrol;
