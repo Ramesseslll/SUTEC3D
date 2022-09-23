@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Victor Perez; EdenFlores; Andres Flores">
-    <meta name="theme-color" content="#2a6e78">
+    <meta name="theme-color" content="#00b1ed">
     <link rel="shortcut icon" href="<?= media();?>/images/sutec-logo2.ico">
     <title><?= $data['page_tag'] ?></title>
     <!-- Main CSS-->
@@ -16,7 +16,7 @@
   </head>
   <body class="app sidebar-mini">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="<?= base_url(); ?>/dashboard">SUTEC 3D</a>
+    <header class="app-header"><a class="app-header__logo" href="<?= base_url(); ?>/dashboard"><img class="" src="<?= media();?>/images/uploads/logoblanco3.png" width="130" height="33" alt=""></a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"><i class="fas fa-bars"></i></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
