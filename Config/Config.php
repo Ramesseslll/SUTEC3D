@@ -20,7 +20,12 @@
 	//Simbolo de moneda
 	const SMONEY = "$";
 
+	//Datos envio de correo
 	
+	const NOMBRE_REMITENTE = "SUTEC 3D";
+	const EMAIL_REMITENTE = "no-reply@sutec3d.com";
+	const NOMBRE_EMPESA = "SUTEC 3D";
+	const WEB_EMPRESA = "www.sutec3d.com";
 
 
  ?>

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Victor Perez; EdenFlores; Andres Flores">
-    <meta name="theme-color" content="#00b1ed">
+    <meta name="theme-color" content="#00bled">
     <link rel="shortcut icon" href="<?= media();?>/images/sutec-logo2.ico">
     <title><?= $data['page_tag'] ?></title>
     <!-- Main CSS-->
@@ -30,4 +30,4 @@
         </li>
       </ul>
     </header>
-    <?php require_once("nav_admin.php"); ?> 
+    <?php require_once("navrol_admin.php"); ?> 
