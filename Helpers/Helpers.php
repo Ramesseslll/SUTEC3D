@@ -8,7 +8,7 @@
     //Retorla la url de Assets
     function media()
     {
-        return BASE_URL."/assets";
+        return BASE_URL."/Assets";
     }
     function headerAdmin($data="")
     {
