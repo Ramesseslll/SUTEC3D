@@ -11,6 +11,8 @@
 			{
 				header('Location: '.base_url().'/login');
 			}
+
+			
 		}
 
 		public function dashboard()

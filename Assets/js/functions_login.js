@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				swal("Por favor", "Escribe usuario y contraseña.", "error");
 				return false;
 			}else{
+				
 				var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
 				var ajaxUrl = base_url+'/Login/loginUser'; 
 				var formData = new FormData(formLogin);
@@ -36,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function(){
 					}else{
 						swal("Atención","Error en el proceso", "error");
 					}
+					
 					return false;
 				}
             }

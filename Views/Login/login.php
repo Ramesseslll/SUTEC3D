@@ -22,6 +22,8 @@
         <center><h1><a href="<?= base_url(); ?>/dashboard"><img class="" src="<?= media();?>/images/uploads/Logo2.png" width="235" height="111" alt=""></a> </h1></center>
       </div>
       <div class="login-box">
+
+
         <form class="login-form" name="formLogin" id="formLogin" action="">
           <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>INICIAR SESIÓN</h3>
           <div class="form-group">
