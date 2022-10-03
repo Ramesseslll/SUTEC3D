@@ -7,7 +7,11 @@
   <title>SUTEC 3D</title>
 </head>
 <body>
+<?php  headerAdmin($data); ?>
 
+ 
+
+<?php footerAdmin($data); ?>
 </body>
 </html>
 
