@@ -3,18 +3,23 @@
 	class Roles extends Controllers{
 		public function __construct()
 		{
-			
+			parent::__construct();
 			session_start();
 			if(empty($_SESSION['login']))
 			{
 				header('Location: '.base_url().'/login');
 			}
-			parent::__construct();
+			getPermisos(2); //numero 2 para redireccionar de permisos a dashboard
+			
 			
 		}
 
 		public function Roles()
 		{
+			if(empty($_SESSION['permisosMod']['r'])){ //IF PARA REDIRECCIONAR A OTRA PAGINA de los persmios
+				header("Location:".base_url().'/dashboard');
+			}
+
 			$data['page_id'] = 3;
 			$data['page_tag'] = "Roles Usuario";
 			$data['page_name'] = "rol_usuario";
@@ -28,6 +33,10 @@
 			$arrData = $this->model->selectRoles();
 
 			for ($i=0; $i < count($arrData); $i++) {
+				$btnView = '';
+				$btnEdit = '';
+				$btnDelete = '';
+
 
 				if($arrData[$i]['status'] == 1)
 				{
@@ -36,11 +45,22 @@
 					$arrData[$i]['status'] = '<span class="badge badge-danger">Inactivo</span>';
 				}
 
-				$arrData[$i]['options'] = '<div class="text-center">
-				<button class="btn btn-secondary btn-sm btnPermisosRol" onClick="fntPermisos('.$arrData[$i]['idrol'].')" title="Permisos"><i class="fas fa-key"></i></button>
-				<button class="btn btn-primary btn-sm btnEditRol" onClick="fntEditRol('.$arrData[$i]['idrol'].')" title="Editar"><i class="fas fa-pencil-alt"></i></button>
-				<button class="btn btn-danger btn-sm btnDelRol" onClick="fntDelRol('.$arrData[$i]['idrol'].')" title="Eliminar"><i class="far fa-trash-alt"></i></button>
+				//Dar permisos
+
+				if($_SESSION['permisosMod']['r']){
+				}
+
+				if($_SESSION['permisosMod']['u']){
+					$btnView = '<button class="btn btn-secondary btn-sm btnPermisosRol" onClick="fntPermisos('.$arrData[$i]['idrol'].')" title="Permisos"><i class="fas fa-key"></i></button>';
+					$btnEdit = '<button class="btn btn-primary btn-sm btnEditRol" onClick="fntEditRol('.$arrData[$i]['idrol'].')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
+				}
+
+				if($_SESSION['permisosMod']['d']){
+					$btnDelete = '<button class="btn btn-danger btn-sm btnDelRol" onClick="fntDelRol('.$arrData[$i]['idrol'].')" title="Eliminar"><i class="far fa-trash-alt"></i></button>
 				</div>';
+				}
+				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
+
 			}
 			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
 			die();
