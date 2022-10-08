@@ -27,3 +27,8 @@
 .notBlock{
 	display: none;
 }
+.required{
+	color: red;
+	font-size: 13pt;
+	font-weight: bold;
+}

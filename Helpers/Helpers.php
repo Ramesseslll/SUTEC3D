@@ -66,6 +66,14 @@
         $_SESSION['permisosMod'] = $permisosMod;
     }
 
+    function sessionUser(int $idpersona){
+
+        require_once ("Models/LoginModel.php");
+        $objLogin = new LoginModel();
+        $request = $objLogin->sessionLogin($idpersona);
+        return $request;
+    }
+
     //Elimina exceso de espacios entre palabras
     function strClean($strCadena){
         $string = preg_replace(['/\s+/','/^\s|\s$/'],[' ',''], $strCadena);

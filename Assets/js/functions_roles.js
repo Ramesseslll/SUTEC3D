@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 });
 
+
 $('#tableRoles').DataTable();
 
 function openModal(){
@@ -80,9 +81,9 @@ function openModal(){
 }
 
 window.addEventListener('load', function() {
-    fntEditRol();
-   // fntDelRol();
-    //fntPermisos();
+    /*fntEditRol();
+    fntDelRol();
+    fntPermisos();*/
 }, false);
 
 function fntEditRol(idrol){

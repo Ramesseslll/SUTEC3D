@@ -50,9 +50,10 @@ document.addEventListener('DOMContentLoaded', function(){
         "iDisplayLength": 5,
         "order":[[0,"desc"]]  
     });
-
-    var formUsuario = document.querySelector("#formUsuario");
-    formUsuario.onsubmit = function(e) {
+     
+    if(document.querySelector("#formUsuario")){
+        var formUsuario = document.querySelector("#formUsuario");
+        formUsuario.onsubmit = function(e) {
         e.preventDefault();
         var strIdentificacion = document.querySelector('#txtIdentificacion').value;
         var strNombre = document.querySelector('#txtNombre').value;
@@ -96,12 +97,81 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         }
 
+        }
+    }
+    //Actualizar Perfil
+    if(document.querySelector("#formPerfil")){
+        var formPerfil = document.querySelector("#formPerfil");
+        formPerfil.onsubmit = function(e) {
+        e.preventDefault();
+        var strIdentificacion = document.querySelector('#txtIdentificacion').value;
+        var strNombre = document.querySelector('#txtNombre').value;
+        var strApellido = document.querySelector('#txtApellido').value;
+        var intTelefono = document.querySelector('#txtTelefono').value;
+        var strPassword = document.querySelector('#txtPassword').value;
+        var strPasswordConfirm = document.querySelector('#txtPasswordConfirm').value;
+        if(strIdentificacion == '' || strApellido == '' || strNombre == '' || intTelefono == '')
+        {
+            swal("Atención", "Todos los campos son obligatorios." , "error");
+            return false;
+        }
+
+        if(strPassword != "" || strPasswordConfirm != "")
+            {   
+                if( strPassword != strPasswordConfirm ){
+                    swal("Atención", "Las contraseñas no son iguales." , "info");
+                    return false;
+                }           
+                if(strPassword.length < 5 ){
+                    swal("Atención", "La contraseña debe tener un mínimo de 5 caracteres." , "info");
+                    return false;
+                }
+            }
+
+        let elementsValid = document.getElementsByClassName("valid");
+        for (let i = 0; i < elementsValid.length; i++) { 
+            if(elementsValid[i].classList.contains('is-invalid')) { 
+                swal("Atención", "Por favor verifique los campos en rojo." , "error");
+                return false;
+            } 
+        } 
+
+        var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        var ajaxUrl = base_url+'/Usuarios/putPerfil'; 
+        var formData = new FormData(formPerfil);
+        request.open("POST",ajaxUrl,true);
+        request.send(formData);
+        request.onreadystatechange = function(){
+            if(request.readyState != 4 ) return; 
+            if(request.status == 200){
+                let objData = JSON.parse(request.responseText);
+                if(objData.status)
+                {
+                    $('#modalFormPerfil').modal("hide");
+                    swal({
+                        title: "",
+                        text: objData.msg,
+                        type: "success",
+                        confirmButtonText: "Aceptar",
+                        closeOnConfirm: false,
+                    }, function(isConfirm) {
+                        if (isConfirm) {
+                            location.reload();
+                        }
+                    });
+                }else{
+                    swal("Error", objData.msg , "error");
+                }
+            }
+        }
+
+        }
     }
 }, false);
 
 
 window.addEventListener('load', function() {
-    fntViewUsuario();
+    //fntViewUsuario();
     fntRolesUsuario();
         
         //fntEditUsuario();
@@ -109,19 +179,18 @@ window.addEventListener('load', function() {
 }, false);
 
 function fntRolesUsuario(){
-    var ajaxUrl = base_url+'/Roles/getSelectRoles';
-    var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    request.open("GET",ajaxUrl,true);
-    request.send();
-
-    request.onreadystatechange = function(){
-        if(request.readyState == 4 && request.status == 200){
-            document.querySelector('#listRolid').innerHTML = request.responseText;
-            document.querySelector('#listRolid').value = 1;
-            $('#listRolid').selectpicker('render');
+    if(document.querySelector('#listRolid')){
+        let ajaxUrl = base_url+'/Roles/getSelectRoles';
+        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        request.open("GET",ajaxUrl,true);
+        request.send();
+        request.onreadystatechange = function(){
+            if(request.readyState == 4 && request.status == 200){
+                document.querySelector('#listRolid').innerHTML = request.responseText;
+                $('#listRolid').selectpicker('render');
+            }
         }
     }
-    
 }
 
 function fntViewUsuario(idpersona){
@@ -197,7 +266,8 @@ function fntEditUsuario(idpersona){
 }
 
 function fntDelUsuario(idpersona){
-    
+
+    var idUsuario = idpersona;
     swal({
         title: "Eliminar Usuario",
         text: "¿Realmente quiere eliminar el Usuario?",
@@ -211,15 +281,15 @@ function fntDelUsuario(idpersona){
         
         if (isConfirm) 
         {
-            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url+'/Usuarios/delUsuario';
-            let strData = "idUsuario="+idpersona;
+            var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            var ajaxUrl = base_url+'/Usuarios/delUsuario';
+            var strData = "idUsuario="+idUsuario;
             request.open("POST",ajaxUrl,true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send(strData);
             request.onreadystatechange = function(){
                 if(request.readyState == 4 && request.status == 200){
-                    let objData = JSON.parse(request.responseText);
+                    var objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
                         swal("Eliminar!", objData.msg , "success");
@@ -245,4 +315,8 @@ function openModal()
     document.querySelector('#titleModal').innerHTML = "Nuevo Usuario";
     document.querySelector("#formUsuario").reset();
     $('#modalFormUsuario').modal('show');
+}
+
+function openModalPerfil(){
+    $('#modalFormPerfil').modal('show');
 }

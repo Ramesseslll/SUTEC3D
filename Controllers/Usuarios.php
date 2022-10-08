@@ -107,10 +107,22 @@
 					$btnView = '<button class="btn btn-info btn-sm btnViewUsuario" onClick="fntViewUsuario('.$arrData[$i]['idpersona'].')" title="Ver usuario"><i class="far fa-eye"></i></button>';
 				}
 				if($_SESSION['permisosMod']['u']){
-					$btnEdit = '<button class="btn btn-primary  btn-sm btnEditUsuario" onClick="fntEditUsuario('.$arrData[$i]['idpersona'].')" title="Editar usuario"><i class="fas fa-pencil-alt"></i></button>';
+					if(($_SESSION['idUser'] == 1 and $_SESSION['userData']['idrol'] == 1) ||
+						($_SESSION['userData']['idrol'] == 1 and $arrData[$i]['idrol'] != 1) ){
+						$btnEdit = '<button class="btn btn-primary  btn-sm btnEditUsuario" onClick="fntEditUsuario('.$arrData[$i]['idpersona'].')" title="Editar usuario"><i class="fas fa-pencil-alt"></i></button>';
+					}else{
+						$btnEdit = '<button class="btn btn-secondary btn-sm" disabled ><i class="fas fa-pencil-alt"></i></button>';
+					}
 				}
 				if($_SESSION['permisosMod']['d']){
-					$btnDelete = '<button class="btn btn-danger btn-sm btnDelUsuario" onClick="fntDelUsuario('.$arrData[$i]['idpersona'].')" title="Eliminar usuario"><i class="far fa-trash-alt"></i></button>';
+					if(($_SESSION['idUser'] == 1 and $_SESSION['userData']['idrol'] == 1) ||
+						($_SESSION['userData']['idrol'] == 1 and $arrData[$i]['idrol'] != 1) and
+						($_SESSION['userData']['idpersona'] != $arrData[$i]['idpersona'] )
+						 ){
+						$btnDelete = '<button class="btn btn-danger btn-sm btnDelUsuario" onClick="fntDelUsuario('.$arrData[$i]['idpersona'].')" title="Eliminar usuario"><i class="far fa-trash-alt"></i></button>';
+					}else{
+						$btnDelete = '<button class="btn btn-secondary btn-sm" disabled ><i class="far fa-trash-alt"></i></button>';
+					}
 				}
 				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 				
@@ -118,7 +130,7 @@
 			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
 			die();
 		}
-
+		
 		public function getUsuario(int $idpersona){
 			
 			$idusuario = intval($idpersona);
@@ -151,6 +163,48 @@
 			}
 			die();
 		}
+		
+		public function perfil(){
 
+			$data['page_tag'] = "Perfil";
+			$data['page_title'] = "Perfil de usuario";
+			$data['page_name'] = "perfil";
+			$data['page_functions_js'] = "functions_usuarios.js";
+			$this->views->getView($this,"perfil",$data);
+		} 
+
+		public function putPerfil(){
+			if($_POST){
+				if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) )
+				{
+					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
+				}else{
+					$idUsuario = $_SESSION['idUser'];
+					$strIdentificacion = strClean($_POST['txtIdentificacion']);
+					$strNombre = strClean($_POST['txtNombre']);
+					$strApellido = strClean($_POST['txtApellido']);
+					$intTelefono = intval(strClean($_POST['txtTelefono']));
+					$strPassword = "";
+					if(!empty($_POST['txtPassword'])){
+						$strPassword = hash("SHA256",$_POST['txtPassword']);
+					}
+					$request_user = $this->model->updatePerfil($idUsuario,
+																$strIdentificacion, 
+																$strNombre,
+																$strApellido, 
+																$intTelefono, 
+																$strPassword);
+					if($request_user)
+					{
+						sessionUser($_SESSION['idUser']);
+						$arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');
+					}else{
+						$arrResponse = array("status" => false, "msg" => 'No es posible actualizar los datos.');
+					}
+				}
+				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+			}
+			die();
+		}
 	}
  ?>

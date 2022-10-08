@@ -19,6 +19,7 @@
 			$data['page_tag'] = "Dashboard - SUTEC 3D";
 			$data['page_title'] = "Dashboard - SUTEC 3D";
 			$data['page_name'] = "dashboard";
+			$data['page_functions_js'] = "functions_dashboard.js";
 			$this->views->getView($this,"dashboard",$data);
 		}
 
