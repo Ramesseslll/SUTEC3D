@@ -1,4 +1,5 @@
-var tableUsuarios;
+let tableUsuarios;
+let rowTable = ""; // almacena el parametro de laa funcion "this" en el boton editar 
 document.addEventListener('DOMContentLoaded', function(){
 
     tableUsuarios = $('#tableUsuarios').dataTable( {
@@ -47,21 +48,22 @@ document.addEventListener('DOMContentLoaded', function(){
         ],
         "resonsieve":"true",
         "bDestroy": true,
-        "iDisplayLength": 5,
+        "iDisplayLength": 10,
         "order":[[0,"desc"]]  
     });
      
     if(document.querySelector("#formUsuario")){
-        var formUsuario = document.querySelector("#formUsuario");
+        let formUsuario = document.querySelector("#formUsuario");
         formUsuario.onsubmit = function(e) {
         e.preventDefault();
-        var strIdentificacion = document.querySelector('#txtIdentificacion').value;
-        var strNombre = document.querySelector('#txtNombre').value;
-        var strApellido = document.querySelector('#txtApellido').value;
-        var strEmail = document.querySelector('#txtEmail').value;
-        var intTelefono = document.querySelector('#txtTelefono').value;
-        var intTipousuario = document.querySelector('#listRolid').value;
-        var strPassword = document.querySelector('#txtPassword').value;
+        let strIdentificacion = document.querySelector('#txtIdentificacion').value;
+        let strNombre = document.querySelector('#txtNombre').value;
+        let strApellido = document.querySelector('#txtApellido').value;
+        let strEmail = document.querySelector('#txtEmail').value;
+        let intTelefono = document.querySelector('#txtTelefono').value;
+        let intTipousuario = document.querySelector('#listRolid').value;
+        let strPassword = document.querySelector('#txtPassword').value;
+        let intStatus = document.querySelector('#listStatus').value;
 
         if(strIdentificacion == '' || strApellido == '' || strNombre == '' || strEmail == '' || intTelefono == '' || intTipousuario == '')
         {
@@ -77,20 +79,34 @@ document.addEventListener('DOMContentLoaded', function(){
             } 
         } 
 
-        var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        var ajaxUrl = base_url+'/Usuarios/setUsuario'; 
-        var formData = new FormData(formUsuario);
+        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        let ajaxUrl = base_url+'/Usuarios/setUsuario'; 
+        let formData = new FormData(formUsuario);
         request.open("POST",ajaxUrl,true);
         request.send(formData);
         request.onreadystatechange = function(){
             if(request.readyState == 4 && request.status == 200){
-                var objData = JSON.parse(request.responseText);
+                let objData = JSON.parse(request.responseText);
                 if(objData.status)
                 {
+                    if(rowTable == ""){
+                            tableUsuarios.api().ajax.reload();
+                        }else{
+                            htmlStatus = intStatus == 1 ? 
+                            '<span class="badge badge-success">Activo</span>' : 
+                            '<span class="badge badge-danger">Inactivo</span>';
+                            rowTable.cells[1].textContent = strNombre;
+                            rowTable.cells[2].textContent = strApellido;
+                            rowTable.cells[3].textContent = strEmail;
+                            rowTable.cells[4].textContent = intTelefono;
+                            rowTable.cells[5].textContent = document.querySelector("#listRolid").selectedOptions[0].text;
+                            rowTable.cells[6].innerHTML = htmlStatus;
+                            
+                        }
                     $('#modalFormUsuario').modal("hide");
                     formUsuario.reset();
                     swal("Usuarios", objData.msg ,"success");
-                    tableUsuarios.api().ajax.reload();
+                    
                 }else{
                     swal("Error", objData.msg , "error");
                 }
@@ -101,15 +117,15 @@ document.addEventListener('DOMContentLoaded', function(){
     }
     //Actualizar Perfil
     if(document.querySelector("#formPerfil")){
-        var formPerfil = document.querySelector("#formPerfil");
+        let formPerfil = document.querySelector("#formPerfil");
         formPerfil.onsubmit = function(e) {
         e.preventDefault();
-        var strIdentificacion = document.querySelector('#txtIdentificacion').value;
-        var strNombre = document.querySelector('#txtNombre').value;
-        var strApellido = document.querySelector('#txtApellido').value;
-        var intTelefono = document.querySelector('#txtTelefono').value;
-        var strPassword = document.querySelector('#txtPassword').value;
-        var strPasswordConfirm = document.querySelector('#txtPasswordConfirm').value;
+        let strIdentificacion = document.querySelector('#txtIdentificacion').value;
+        let strNombre = document.querySelector('#txtNombre').value;
+        let strApellido = document.querySelector('#txtApellido').value;
+        let intTelefono = document.querySelector('#txtTelefono').value;
+        let strPassword = document.querySelector('#txtPassword').value;
+        let strPasswordConfirm = document.querySelector('#txtPasswordConfirm').value;
         if(strIdentificacion == '' || strApellido == '' || strNombre == '' || intTelefono == '')
         {
             swal("Atención", "Todos los campos son obligatorios." , "error");
@@ -136,9 +152,9 @@ document.addEventListener('DOMContentLoaded', function(){
             } 
         } 
 
-        var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        var ajaxUrl = base_url+'/Usuarios/putPerfil'; 
-        var formData = new FormData(formPerfil);
+        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        let ajaxUrl = base_url+'/Usuarios/putPerfil'; 
+        let formData = new FormData(formPerfil);
         request.open("POST",ajaxUrl,true);
         request.send(formData);
         request.onreadystatechange = function(){
@@ -165,6 +181,53 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         }
 
+        }
+    }
+    //Actualizar Datos Fiscales
+    if(document.querySelector("#formDataFiscal")){
+        let formDataFiscal = document.querySelector("#formDataFiscal");
+        formDataFiscal.onsubmit = function(e) {
+            e.preventDefault();
+            let strNit = document.querySelector('#txtNit').value;
+            let strNombreFiscal = document.querySelector('#txtNombreFiscal').value;
+            let strDirFiscal = document.querySelector('#txtDirFiscal').value;
+           
+            if(strNit == '' || strNombreFiscal == '' || strDirFiscal == '' )
+            {
+                swal("Atención", "Todos los campos son obligatorios." , "error");
+                return false;
+            }
+            
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url+'/Usuarios/putDFical'; 
+            let formData = new FormData(formDataFiscal);
+            request.open("POST",ajaxUrl,true);
+            request.send(formData);
+            request.onreadystatechange = function(){
+                if(request.readyState != 4 ) return; 
+                if(request.status == 200){
+                    let objData = JSON.parse(request.responseText);
+                    if(objData.status)
+                    {
+                        $('#modalFormPerfil').modal("hide");
+                        swal({
+                            title: "",
+                            text: objData.msg,
+                            type: "success",
+                            confirmButtonText: "Aceptar",
+                            closeOnConfirm: false,
+                        }, function(isConfirm) {
+                            if (isConfirm) {
+                                location.reload();
+                            }
+                        });
+                    }else{
+                        swal("Error", objData.msg , "error");
+                    }
+                }
+                
+                return false;
+            }
         }
     }
 }, false);
@@ -194,18 +257,17 @@ function fntRolesUsuario(){
 }
 
 function fntViewUsuario(idpersona){
-    var idpersona = idpersona;
-    var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    var ajaxUrl = base_url+'/Usuarios/getUsuario/'+idpersona;
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url+'/Usuarios/getUsuario/'+idpersona;
     request.open("GET",ajaxUrl,true);
     request.send();
     request.onreadystatechange = function(){
         if(request.readyState == 4 && request.status == 200){
-            var objData = JSON.parse(request.responseText);
+            let objData = JSON.parse(request.responseText);
 
             if(objData.status)
             {
-               var estadoUsuario = objData.data.status == 1 ? 
+               let estadoUsuario = objData.data.status == 1 ? 
                 '<span class="badge badge-success">Activo</span>' : 
                 '<span class="badge badge-danger">Inactivo</span>';
 
@@ -225,21 +287,21 @@ function fntViewUsuario(idpersona){
     }
 }
 
-function fntEditUsuario(idpersona){
+function fntEditUsuario(element,idpersona){
+    rowTable = element.parentNode.parentNode.parentNode;
     document.querySelector('#titleModal').innerHTML ="Actualizar Usuario";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML ="Actualizar";
 
-    var idpersona =idpersona;
-    var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    var ajaxUrl = base_url+'/Usuarios/getUsuario/'+idpersona;
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url+'/Usuarios/getUsuario/'+idpersona;
     request.open("GET",ajaxUrl,true);
     request.send();
     request.onreadystatechange = function(){
 
         if(request.readyState == 4 && request.status == 200){
-            var objData = JSON.parse(request.responseText);
+            let objData = JSON.parse(request.responseText);
 
             if(objData.status)
             {
@@ -267,7 +329,7 @@ function fntEditUsuario(idpersona){
 
 function fntDelUsuario(idpersona){
 
-    var idUsuario = idpersona;
+    
     swal({
         title: "Eliminar Usuario",
         text: "¿Realmente quiere eliminar el Usuario?",
@@ -281,15 +343,15 @@ function fntDelUsuario(idpersona){
         
         if (isConfirm) 
         {
-            var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            var ajaxUrl = base_url+'/Usuarios/delUsuario';
-            var strData = "idUsuario="+idUsuario;
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url+'/Usuarios/delUsuario';
+            let strData = "idUsuario="+idpersona;
             request.open("POST",ajaxUrl,true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send(strData);
             request.onreadystatechange = function(){
                 if(request.readyState == 4 && request.status == 200){
-                    var objData = JSON.parse(request.responseText);
+                    let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
                         swal("Eliminar!", objData.msg , "success");
@@ -308,6 +370,7 @@ function fntDelUsuario(idpersona){
 
 function openModal()
 {
+    rowTable="";
     document.querySelector('#idUsuario').value ="";
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
