@@ -76,7 +76,7 @@
     function sessionStart(){
 
         session_start();
-        $inactive = 20;
+        $inactive = 60; //Temporizador de cierre de secion de carga
         if (isset($_SESSION['timeout'])) {
             $session_in = time() - $_SESSION['inicio'];
             if($session_in >  $inactive){
