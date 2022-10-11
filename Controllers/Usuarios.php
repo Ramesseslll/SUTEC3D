@@ -5,6 +5,7 @@
 		{
 			parent::__construct();
 			session_start();
+			//session_regenerate_id(true);
 			if(empty($_SESSION['login']))
 			{
 				header('Location: '.base_url().'/login');
@@ -29,7 +30,6 @@
 
 		public function setUsuario(){
 			if($_POST){
-				
 				if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['listRolid']) || empty($_POST['listStatus']) )
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
@@ -42,11 +42,12 @@
 					$strEmail = strtolower(strClean($_POST['txtEmail']));
 					$intTipoId = intval(strClean($_POST['listRolid']));
 					$intStatus = intval(strClean($_POST['listStatus']));
-
+					$request_user = "";
 					if($idUsuario == 0)
 					{
 						$option = 1;
 						$strPassword =  empty($_POST['txtPassword']) ? hash("SHA256",passGenerator()) : hash("SHA256",$_POST['txtPassword']);
+						if($_SESSION['permisosMod']['w']){
 						$request_user = $this->model->insertUsuario($strIdentificacion,
 																			$strNombre, 
 																			$strApellido, 
@@ -55,9 +56,11 @@
 																			$strPassword, 
 																			$intTipoId, 
 																			$intStatus );
+						}													
 					}else{
 						$option = 2;
 						$strPassword =  empty($_POST['txtPassword']) ? "" : hash("SHA256",$_POST['txtPassword']);
+						if($_SESSION['permisosMod']['u']){
 						$request_user = $this->model->updateUsuario($idUsuario,
 																	$strIdentificacion, 
 																	$strNombre,
@@ -67,7 +70,7 @@
 																	$strPassword, 
 																	$intTipoId, 
 																	$intStatus);
-
+						}
 					}
 
 					if($request_user > 0 )
@@ -90,8 +93,9 @@
 
 		public function getUsuarios()
 		{
-			$arrData = $this->model->selectUsuarios();
-			for ($i=0; $i < count($arrData); $i++) {
+			if($_SESSION['permisosMod']['r']){
+			 	$arrData = $this->model->selectUsuarios();
+			 	for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
 				$btnEdit = '';
 				$btnDelete = '';
@@ -126,16 +130,17 @@
 				}
 				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 				
+			 	}
+			 	echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
 			}
-			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
 			die();
 		}
 		
-		public function getUsuario(int $idpersona){
-			
-			$idusuario = intval($idpersona);
-			if($idusuario > 0)
-			{
+		public function getUsuario($idpersona){
+			if($_SESSION['permisosMod']['r']){
+				$idusuario = intval($idpersona);
+				if($idusuario > 0)
+				{
 				$arrData = $this->model->selectUsuario($idusuario);
 				if(empty($arrData))
 				{
@@ -145,12 +150,14 @@
 				}
 				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 			}
-			die();
 		}
+		die();
+	}
 
-		public function delUsuario()
-		{
-			if($_POST){
+	public function delUsuario()
+	{
+		if($_POST){
+			if($_SESSION['permisosMod']['d']){
 				$intIdpersona = intval($_POST['idUsuario']);
 				$requestDelete = $this->model->deleteUsuario($intIdpersona);
 				if($requestDelete)
@@ -161,8 +168,9 @@
 				}
 				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 			}
-			die();
 		}
+		die();
+	}
 		
 		public function perfil(){
 
