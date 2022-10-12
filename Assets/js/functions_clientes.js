@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function(){
             request.send(formData);
             request.onreadystatechange = function(){
                 if(request.readyState == 4 && request.status == 200){
-                    var objData = JSON.parse(request.responseText);
+                    let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
                         $('#modalFormCliente').modal("hide");
