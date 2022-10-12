@@ -1,4 +1,5 @@
-    <script>
+   <html>
+   <script>
         const base_url = "<?= base_url(); ?>";
     </script>
     <!-- Essential javascripts for application to work-->
