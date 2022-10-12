@@ -73,7 +73,23 @@
         $request = $objLogin->sessionLogin($idpersona);
         return $request;
     }
+<<<<<<< HEAD
     
+=======
+    function sessionStart(){
+
+        session_start();
+        $inactive = 60; //Temporizador de cierre de secion de carga
+        if (isset($_SESSION['timeout'])) {
+            $session_in = time() - $_SESSION['inicio'];
+            if($session_in >  $inactive){
+                header("Location: ".BASE_URL."/logout");
+            }
+        }else{
+            header("Location: ".BASE_URL."/logout");
+        }
+    }
+>>>>>>> 18acb3c92d16f995d3b6c8618d3cfd1ccb12e9e0
 
     //Elimina exceso de espacios entre palabras
     function strClean($strCadena){
