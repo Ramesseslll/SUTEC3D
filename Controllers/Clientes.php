@@ -26,8 +26,9 @@ class Clientes extends Controllers{
 	}
 
 	public function setCliente(){
-		error_reporting(0);
+		//error_reporting(0);
 		if($_POST){
+			
 			if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['txtNit']) || empty($_POST['txtNombreFiscal']) || empty($_POST['txtDirFiscal']) )
 			{
 				$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
@@ -59,7 +60,7 @@ class Clientes extends Controllers{
 																			$strDirFiscal );
 					
 				}else{
-					/*$option = 2;
+					$option = 2;
 					$strPassword =  empty($_POST['txtPassword']) ? "" : hash("SHA256",$_POST['txtPassword']);
 					if($_SESSION['permisosMod']['u']){
 						$request_user = $this->model->updateCliente($idUsuario,
@@ -71,8 +72,9 @@ class Clientes extends Controllers{
 																	$strPassword, 
 																	$strNit,
 																	$strNomFiscal, 
-																	$strDirFiscal);*/
+																	$strDirFiscal);
 				}
+			}	
 
 				if($request_user > 0 )
 				{
@@ -134,6 +136,23 @@ class Clientes extends Controllers{
 		die();
 	}
 
+	public function delCliente()
+	{
+		if($_POST){
+			//if($_SESSION['permisosMod']['d']){
+				$intIdpersona = intval($_POST['idUsuario']);
+				$requestDelete = $this->model->deleteCliente($intIdpersona);
+				if($requestDelete)
+				{
+					$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el cliente');
+				}else{
+					$arrResponse = array('status' => false, 'msg' => 'Error al eliminar al cliente.');
+				}
+				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+			//}
+		}
+		die();
+	}
 
 }
 

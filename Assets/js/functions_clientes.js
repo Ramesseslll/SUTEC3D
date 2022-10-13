@@ -133,6 +133,78 @@ function fntViewInfo(idpersona){
     } 
 }
 
+function fntEditInfo(element, idpersona){
+    rowTable = element.parentNode.parentNode.parentNode;
+    document.querySelector('#titleModal').innerHTML ="Actualizar Cliente";
+    document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
+    document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
+    document.querySelector('#btnText').innerHTML ="Actualizar";
+
+    var idpersona =idpersona;
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url+'/Clientes/getCliente/'+idpersona;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function(){
+
+        if(request.readyState == 4 && request.status == 200){
+            let objData = JSON.parse(request.responseText);
+            if(objData.status)
+            {
+                document.querySelector("#idUsuario").value = objData.data.idpersona;
+                document.querySelector("#txtIdentificacion").value = objData.data.identificacion;
+                document.querySelector("#txtNombre").value = objData.data.nombres;
+                document.querySelector("#txtApellido").value = objData.data.apellidos;
+                document.querySelector("#txtTelefono").value = objData.data.telefono;
+                document.querySelector("#txtEmail").value = objData.data.email_user;
+                document.querySelector("#txtNit").value =objData.data.nit;
+                document.querySelector("#txtNombreFiscal").value =objData.data.nombrefiscal;
+                document.querySelector("#txtDirFiscal").value =objData.data.direccionfiscal;
+            }
+        }
+        $('#modalFormCliente').modal('show');
+    }
+}
+
+function fntDelInfo(idpersona){
+    
+    //var idUsuario = idpersona;
+    swal({
+        title: "Eliminar Cliente",
+        text: "¿Realmente quiere eliminar al cliente?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Si, eliminar!",
+        cancelButtonText: "No, cancelar!",
+        closeOnConfirm: false,
+        closeOnCancel: true
+    }, function(isConfirm) {
+        
+        if (isConfirm) 
+        {
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url+'/Clientes/delCliente';
+            let strData = "idUsuario="+idpersona;
+            request.open("POST",ajaxUrl,true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send(strData);
+            request.onreadystatechange = function(){
+                if(request.readyState == 4 && request.status == 200){
+                    let objData = JSON.parse(request.responseText);
+                    if(objData.status)
+                    {
+                        swal("Eliminar!", objData.msg , "success");
+                        tableClientes.api().ajax.reload();
+                    }else{
+                        swal("Atención!", objData.msg , "error");
+                    }
+                }
+            }
+        }
+
+    });
+
+}
 
 function openModal()
 {
