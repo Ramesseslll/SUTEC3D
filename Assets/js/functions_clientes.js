@@ -1,4 +1,5 @@
-let tableClientes; 
+let tableClientes;
+let rowTable = "";
 document.addEventListener('DOMContentLoaded', function(){
 
     tableClientes = $('#tableClientes').dataTable( {
@@ -89,14 +90,24 @@ document.addEventListener('DOMContentLoaded', function(){
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        if(rowTable == ""){
+                            tableClientes.api().ajax.reload();
+                        }else{
+                           rowTable.cells[1].textContent =  strIdentificacion;
+                           rowTable.cells[2].textContent =  strNombre;
+                           rowTable.cells[3].textContent =  strApellido;
+                           rowTable.cells[4].textContent =  strEmail;
+                           rowTable.cells[5].textContent =  intTelefono;
+                           rowTable = "";
+                        }
                         $('#modalFormCliente').modal("hide");
                         formCliente.reset();
                         swal("Usuarios", objData.msg ,"success");
-                        tableClientes.api().ajax.reload(); //recagargar datos
                     }else{
                         swal("Error", objData.msg , "error");
                     }
                 }
+                divLoading.style.display = "none";
                 return false;
             }
         }
@@ -139,8 +150,6 @@ function fntEditInfo(element, idpersona){
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML ="Actualizar";
-
-    var idpersona =idpersona;
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url+'/Clientes/getCliente/'+idpersona;
     request.open("GET",ajaxUrl,true);
@@ -167,8 +176,6 @@ function fntEditInfo(element, idpersona){
 }
 
 function fntDelInfo(idpersona){
-    
-    //var idUsuario = idpersona;
     swal({
         title: "Eliminar Cliente",
         text: "¿Realmente quiere eliminar al cliente?",
