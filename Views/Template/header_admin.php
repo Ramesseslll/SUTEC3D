@@ -5,7 +5,7 @@
     <meta name="description" content="SUTEC 3D">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Victor Perez; EdenFlores; Andres Flores">
+    <meta name="author" content="Victor Perez; Eden Flores; Andres Flores">
     <meta name="theme-color" content="#00bled">
     <link rel="shortcut icon" href="<?= media();?>/images/sutec-logo2.ico">
     <title><?= $data['page_tag'] ?></title>
