@@ -25,10 +25,9 @@ class Clientes extends Controllers{
 		$this->views->getView($this,"clientes",$data);
 	}
 
-	public function setCliente(){
-		//error_reporting(0);
+public function setCliente(){
+		error_reporting(0);
 		if($_POST){
-			
 			if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['txtNit']) || empty($_POST['txtNombreFiscal']) || empty($_POST['txtDirFiscal']) )
 			{
 				$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
@@ -43,22 +42,24 @@ class Clientes extends Controllers{
 				$strNomFiscal = strClean($_POST['txtNombreFiscal']);
 				$strDirFiscal = strClean($_POST['txtDirFiscal']);
 				$intTipoId = 7;
-				//$request_user = "";
+				$request_user = "";
 				if($idUsuario == 0)
 				{
 					$option = 1;
-					$strPassword =  empty($_POST['txtPassword']) ? hash("SHA256",passGenerator()) : hash("SHA256",$_POST['txtPassword']);
+					$strPassword =  empty($_POST['txtPassword']) ? passGenerator() : $_POST['txtPassword'];
+					$strPasswordEncript = hash("SHA256",$strPassword);
+					if($_SESSION['permisosMod']['w']){
 						$request_user = $this->model->insertCliente($strIdentificacion,
 																			$strNombre, 
 																			$strApellido, 
 																			$intTelefono, 
 																			$strEmail,
-																			$strPassword,
+																			$strPasswordEncript,
 																			$intTipoId, 
 																			$strNit,
 																			$strNomFiscal,
 																			$strDirFiscal );
-					
+					}
 				}else{
 					$option = 2;
 					$strPassword =  empty($_POST['txtPassword']) ? "" : hash("SHA256",$_POST['txtPassword']);
@@ -73,14 +74,19 @@ class Clientes extends Controllers{
 																	$strNit,
 																	$strNomFiscal, 
 																	$strDirFiscal);
+					}
 				}
-			}	
 
 				if($request_user > 0 )
 				{
 					if($option == 1){
 						$arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
-						
+						$nombreUsuario = $strNombre.' '.$strApellido;
+						$dataUsuario = array('nombreUsuario' => $nombreUsuario,
+											 'email' => $strEmail,
+											 'password' => $strPassword,
+											 'asunto' => 'Bienvenido a tu tienda en línea');
+						sendEmail($dataUsuario,'email_bienvenida');
 					}else{
 						$arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');
 					}
@@ -120,7 +126,8 @@ class Clientes extends Controllers{
 	}
 
 //Ver clientes
-	public function getCliente(int $idpersona){
+	public function getCliente($idpersona){
+	if($_SESSION['permisosMod']['r']){
 		$idusuario = intval($idpersona);
 		if($idusuario > 0)
 		{
@@ -132,6 +139,7 @@ class Clientes extends Controllers{
 					$arrResponse = array('status' => true, 'data' => $arrData);
 			}
 			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+			}
 		}
 		die();
 	}
@@ -139,7 +147,7 @@ class Clientes extends Controllers{
 	public function delCliente()
 	{
 		if($_POST){
-			//if($_SESSION['permisosMod']['d']){
+			if($_SESSION['permisosMod']['d']){
 				$intIdpersona = intval($_POST['idUsuario']);
 				$requestDelete = $this->model->deleteCliente($intIdpersona);
 				if($requestDelete)
@@ -149,7 +157,7 @@ class Clientes extends Controllers{
 					$arrResponse = array('status' => false, 'msg' => 'Error al eliminar al cliente.');
 				}
 				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
-			//}
+			}
 		}
 		die();
 	}
