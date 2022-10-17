@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function(){
                         swal("Error", objData.msg , "error");
                     }
                 }
-                divLoading.style.display = "none";
+                
                 return false;
             }
         }
