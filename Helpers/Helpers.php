@@ -8,7 +8,7 @@
     //Retorla la url de Assets
     function media()
     {
-        return BASE_URL."/assets";
+        return BASE_URL."/Assets";
     }
     function headerAdmin($data="")
     {
@@ -79,6 +79,10 @@
         $destino    = 'Assets/images/uploads/'.$name;        
         $move = move_uploaded_file($url_temp, $destino);
         return $move;
+    }
+
+    function deleteFile(string $name){
+        unlink('Assets/images/uploads/'.$name);
     }
     
     //Elimina exceso de espacios entre palabras

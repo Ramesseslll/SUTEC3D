@@ -75,12 +75,12 @@
 							if($nombre_foto != ''){ uploadImage($foto,$imgPortada); }
 						}else{
 							$arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');
-							/*if($nombre_foto != ''){ uploadImage($foto,$imgPortada); }
+							if($nombre_foto != ''){ uploadImage($foto,$imgPortada); }
 
 							if(($nombre_foto == '' && $_POST['foto_remove'] == 1 && $_POST['foto_actual'] != 'portada_categoria.png')
 								|| ($nombre_foto != '' && $_POST['foto_actual'] != 'portada_categoria.png')){
 								deleteFile($_POST['foto_actual']);
-							}*/
+							}
 						}
 					}else if($request_cateria == 'exist'){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! La categoría ya existe.');
@@ -93,7 +93,7 @@
 			die();
 		}
 
-		/*public function getCategorias()
+		public function getCategorias()
 		{
 			if($_SESSION['permisosMod']['r']){
 				$arrData = $this->model->selectCategorias();
@@ -113,7 +113,7 @@
 						$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idcategoria'].')" title="Ver categoría"><i class="far fa-eye"></i></button>';
 					}
 					if($_SESSION['permisosMod']['u']){
-						$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idcategoria'].')" title="Editar categoría"><i class="fas fa-pencil-alt"></i></button>';
+						$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo('.$arrData[$i]['idcategoria'].')" title="Editar categoría"><i class="fas fa-pencil-alt"></i></button>';
 					}
 					if($_SESSION['permisosMod']['d']){	
 						$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idcategoria'].')" title="Eliminar categoría"><i class="far fa-trash-alt"></i></button>';
@@ -123,9 +123,9 @@
 				echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
 			}
 			die();
-		}*/
+		}
 
-		/*public function getCategoria($idcategoria)
+		public function getCategoria($idcategoria)
 		{
 			if($_SESSION['permisosMod']['r']){
 				$intIdcategoria = intval($idcategoria);
@@ -143,12 +143,12 @@
 				}
 			}
 			die();
-		}*/
+		}
 
-		/*public function delCategoria()
+		public function delCategoria()
 		{
 			if($_POST){
-				if($_SESSION['permisosMod']['d']){
+				//if($_SESSION['permisosMod']['d']){
 					$intIdcategoria = intval($_POST['idCategoria']);
 					$requestDelete = $this->model->deleteCategoria($intIdcategoria);
 					if($requestDelete == 'ok')
@@ -161,9 +161,9 @@
 					}
 					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 				}
-			}
+			//}
 			die();
-		}*/
+		}
 
 		/*public function getSelectCategorias(){
 			$htmlOptions = "";
