@@ -1,4 +1,5 @@
-var tableCategorias;
+let tableCategorias;
+let rowTable = "";
 document.addEventListener('DOMContentLoaded', function(){
 
        tableCategorias = $('#tableCategorias').dataTable( {
@@ -117,8 +118,8 @@ document.addEventListener('DOMContentLoaded', function(){
                 let objData = JSON.parse(request.responseText);
                 if(objData.status)
                 {
-                    /*if(rowTable == ""){
-                        //tableCategorias.api().ajax.reload();
+                    if(rowTable == ""){
+                        tableCategorias.api().ajax.reload();
                     }else{
                         htmlStatus = intStatus == 1 ? 
                             '<span class="badge badge-success">Activo</span>' : 
@@ -127,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function(){
                         rowTable.cells[2].textContent = strDescripcion;
                         rowTable.cells[3].innerHTML = htmlStatus;
                         rowTable = "";
-                    }*/
+                    }
 
                     $('#modalFormCategorias').modal("hide");
                     formCategoria.reset();
@@ -146,6 +147,7 @@ document.addEventListener('DOMContentLoaded', function(){
 }, false);
 
 function fntViewInfo(idcategoria){
+
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url+'/Categorias/getCategoria/'+idcategoria;
     request.open("GET",ajaxUrl,true);
@@ -172,13 +174,12 @@ function fntViewInfo(idcategoria){
     }
 }
 
-function fntEditInfo(idcategoria){
-    //rowTable = element.parentNode.parentNode.parentNode;
+function fntEditInfo(element,idcategoria){
+    rowTable = element.parentNode.parentNode.parentNode;
     document.querySelector('#titleModal').innerHTML ="Actualizar Categoría";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML ="Actualizar";
-    idcategoria = idcategoria;
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url+'/Categorias/getCategoria/'+idcategoria;
     request.open("GET",ajaxUrl,true);
@@ -223,7 +224,7 @@ function fntEditInfo(idcategoria){
 }
 
 function fntDelInfo(idcategoria){
-    var idcategoria = idcategoria;
+    
     swal({
         title: "Eliminar Categoría",
         text: "¿Realmente quiere eliminar la categoría?",
@@ -271,7 +272,7 @@ function removePhoto(){
 
 function openModal()
 {
-    //rowTable = "";
+    rowTable = "";
     document.querySelector('#idCategoria').value ="";
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");

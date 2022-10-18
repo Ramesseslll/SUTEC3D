@@ -43,7 +43,6 @@
 					$url_temp    	= $foto['tmp_name'];
 					$imgPortada 	= 'portada_categoria.png';
 					$request_cateria = "";
-
 					if($nombre_foto != ''){
 						$imgPortada = 'img_'.md5(date('d-m-Y H:m:s')).'.jpg';
 					}
@@ -51,13 +50,13 @@
 					if($intIdcategoria == 0)
 					{
 						//Crear
-						//if($_SESSION['permisosMod']['w']){
+						if($_SESSION['permisosMod']['w']){
 							$request_cateria = $this->model->inserCategoria($strCategoria, $strDescipcion,$imgPortada,$intStatus);
 							$option = 1;
-						//}
+						}
 					}else{
 						//Actualizar
-						//if($_SESSION['permisosMod']['u']){
+						if($_SESSION['permisosMod']['u']){
 							if($nombre_foto == ''){
 								if($_POST['foto_actual'] != 'portada_categoria.png' && $_POST['foto_remove'] == 0 ){
 									$imgPortada = $_POST['foto_actual'];
@@ -65,7 +64,7 @@
 							}
 							$request_cateria = $this->model->updateCategoria($intIdcategoria,$strCategoria, $strDescipcion,$imgPortada,$intStatus);
 							$option = 2;
-						//}
+						}
 					}
 					if($request_cateria > 0 )
 					{
@@ -113,7 +112,7 @@
 						$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idcategoria'].')" title="Ver categoría"><i class="far fa-eye"></i></button>';
 					}
 					if($_SESSION['permisosMod']['u']){
-						$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo('.$arrData[$i]['idcategoria'].')" title="Editar categoría"><i class="fas fa-pencil-alt"></i></button>';
+						$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idcategoria'].')" title="Editar categoría"><i class="fas fa-pencil-alt"></i></button>';
 					}
 					if($_SESSION['permisosMod']['d']){	
 						$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idcategoria'].')" title="Eliminar categoría"><i class="far fa-trash-alt"></i></button>';
@@ -148,7 +147,7 @@
 		public function delCategoria()
 		{
 			if($_POST){
-				//if($_SESSION['permisosMod']['d']){
+				if($_SESSION['permisosMod']['d']){
 					$intIdcategoria = intval($_POST['idCategoria']);
 					$requestDelete = $this->model->deleteCategoria($intIdcategoria);
 					if($requestDelete == 'ok')
@@ -161,7 +160,7 @@
 					}
 					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 				}
-			//}
+			}
 			die();
 		}
 
