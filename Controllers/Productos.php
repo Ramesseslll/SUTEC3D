@@ -60,8 +60,6 @@
 
 		public function setProducto(){
 			if($_POST){
-                dep($_POST);
-                die();
 				if(empty($_POST['txtNombre']) || empty($_POST['txtCodigo']) || empty($_POST['listCategoria']) || empty($_POST['txtPrecio']) || empty($_POST['listStatus']) )
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
@@ -75,12 +73,12 @@
 					$strPrecio = strClean($_POST['txtPrecio']);
 					$intStock = intval($_POST['txtStock']);
 					$intStatus = intval($_POST['listStatus']);
-					$request_producto = "";
+					//$request_producto = "";
 
 					if($idProducto == 0)
 					{
 						$option = 1;
-						if($_SESSION['permisosMod']['w']){
+						//if($_SESSION['permisosMod']['w']){
 							$request_producto = $this->model->insertProducto($strNombre, 
 																		$strDescripcion, 
 																		$strCodigo, 
@@ -88,10 +86,10 @@
 																		$strPrecio, 
 																		$intStock, 
 																		$intStatus );
-						}
+						//}
 					}else{
 						$option = 2;
-						if($_SESSION['permisosMod']['u']){
+						/*if($_SESSION['permisosMod']['u']){
 							$request_producto = $this->model->updateProducto($idProducto,
 																		$strNombre,
 																		$strDescripcion, 
@@ -100,14 +98,14 @@
 																		$strPrecio, 
 																		$intStock, 
 																		$intStatus);
-						}
+						}*/
 					}
 					if($request_producto > 0 )
 					{
 						if($option == 1){
 							$arrResponse = array('status' => true, 'idproducto' => $request_producto, 'msg' => 'Datos guardados correctamente.');
 						}else{
-							$arrResponse = array('status' => true, 'idproducto' => $idProducto, 'msg' => 'Datos Actualizados correctamente.');
+							//$arrResponse = array('status' => true, 'idproducto' => $idProducto, 'msg' => 'Datos Actualizados correctamente.');
 						}
 					}else if($request_producto == 'exist'){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! ya existe un producto con el Código Ingresado.');		

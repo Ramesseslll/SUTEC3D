@@ -104,13 +104,14 @@ window.addEventListener('load', function() {
             request.send(formData);
             request.onreadystatechange = function(){
                 if(request.readyState == 4 && request.status == 200){
-                    console.log(request.responseText);
-                    /*let objData = JSON.parse(request.responseText);
+                    let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
-                        /*swal("", objData.msg ,"success");
+                        swal("", objData.msg ,"success");
                         document.querySelector("#idProducto").value = objData.idproducto;
-                        document.querySelector("#containerGallery").classList.remove("notblock");
+                        tableProductos.api().ajax.reload();
+                        
+                        /*document.querySelector("#containerGallery").classList.remove("notblock");
 
                         if(rowTable == ""){
                             tableProductos.api().ajax.reload();
@@ -124,13 +125,13 @@ window.addEventListener('load', function() {
                             rowTable.cells[4].textContent = smony+strPrecio;
                             rowTable.cells[5].innerHTML =  htmlStatus;
                             rowTable = ""; 
-                        }
+                        }*/
                     }else{
                         swal("Error", objData.msg , "error");
-                    }*/
+                    }
                 }
                // divLoading.style.display = "none";
-                //return false;
+                return false;
             }
         }
     }

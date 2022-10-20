@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-10-2022 a las 17:54:02
--- Versión del servidor: 10.1.25-MariaDB
--- Versión de PHP: 7.1.7
+-- Tiempo de generación: 20-10-2022 a las 18:53:04
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -44,7 +44,35 @@ CREATE TABLE `categoria` (
 INSERT INTO `categoria` (`idcategoria`, `nombre`, `descripcion`, `portada`, `datecreated`, `status`) VALUES
 (1, 'electronica', 'electro', 'img_957abb0903ecca6f0478c800b545a73c.jpg', '2022-10-17 10:41:30', 1),
 (2, 'tecnologia', 'tecno', 'img_80a3a0531310a06f33e18298f6e33ee1.jpg', '2022-10-17 10:43:13', 1),
-(3, 'prueba', 'prueba', 'img_3662d3bc8586337927135f61ec5197e8.jpg', '2022-10-17 10:50:57', 1);
+(3, 'prueba', 'prueba', 'img_3662d3bc8586337927135f61ec5197e8.jpg', '2022-10-17 10:50:57', 1),
+(4, 'tecno', 'dadad', 'img_db505252f2d5c4b36dcd7bba0b4698a7.jpg', '2022-10-17 11:54:43', 1),
+(5, 'carros', 'color rojo', 'img_ec3fca2c053329a579df3f91ad328e62.jpg', '2022-10-17 12:01:17', 1),
+(6, '43434', 'eer', 'img_c63111e9f9c2bb4d6b9e65d9754149ec.jpg', '2022-10-17 13:57:46', 0),
+(7, 'Quimica', 'Productos Electronicos', 'portada_categoria.png', '2022-10-17 14:02:09', 0),
+(8, 'Botellas', 'Rojas', 'portada_categoria.png', '2022-10-17 14:08:07', 0),
+(9, 'Cel', 'Rojo', 'img_3e86c2341775225c32076c3ae67c5afb.jpg', '2022-10-17 14:14:32', 0),
+(10, 'Comida', '2323', 'img_6bbd17f184150a6d9a2821cfb9f98c68.jpg', '2022-10-17 14:22:57', 0),
+(11, 'Ropa', 'Variedad', 'img_6d84842ecfbc66fd265da7bf201ca58b.jpg', '2022-10-17 14:31:07', 0),
+(12, 'Lentes', 'Bri', 'img_9853b6bba8cce849c567b89732fed344.jpg', '2022-10-17 14:37:37', 0),
+(13, 'Lentesdd', 'Bri', 'img_eabe77d9c9a9891610ecff964dc08635.jpg', '2022-10-17 14:37:53', 0),
+(14, 'naranja', '2378778', 'portada_categoria.png', '2022-10-17 14:39:20', 0),
+(15, 'Dulces', '2232', 'img_6a0d4bc899c4859e1d959a6246fe7428.jpg', '2022-10-17 15:07:49', 0),
+(16, 'Lapidas', 'Buen Electrónico', 'img_c17e6703e3299cdc6dbd8bc8664c0f9e.jpg', '2022-10-18 11:14:43', 0),
+(17, 'nivelas', 'corona', 'img_6403c0f3686993a8260dfd361bc9980d.jpg', '2022-10-18 11:18:06', 0),
+(18, 'Electrodomésticos', 'Electrodomésticos', 'portada_categoria.png', '2022-10-19 13:20:35', 1),
+(19, 'Modas', 'Modas', 'portada_categoria.png', '2022-10-19 13:29:25', 1),
+(20, 'Titanium', 'Titanium', 'portada_categoria.png', '2022-10-19 13:34:07', 1),
+(21, 'victor', 'vannda', 'portada_categoria.png', '2022-10-19 13:38:35', 0),
+(22, 'ggggggyyyy', 'yeryeyr', 'portada_categoria.png', '2022-10-19 13:48:56', 0),
+(23, 'Focos', 'Focos', 'portada_categoria.png', '2022-10-19 14:08:42', 1),
+(24, 'HDHHDSHDH', 'SDSDSHDHS', 'portada_categoria.png', '2022-10-19 14:15:46', 0),
+(25, 'kakskask', 'sdsdjsjdsjkd', 'portada_categoria.png', '2022-10-19 14:21:03', 0),
+(26, 'Tv', 'tv', 'portada_categoria.png', '2022-10-19 14:26:33', 1),
+(27, 'Tenis', 'tenis', 'portada_categoria.png', '2022-10-19 14:30:22', 1),
+(28, 'Suteresss', '42342432', 'portada_categoria.png', '2022-10-19 14:30:43', 1),
+(29, 'Celulares t', 'celulares', 'portada_categoria.png', '2022-10-19 14:32:58', 1),
+(30, 'Samsung', 'ssasa', 'portada_categoria.png', '2022-10-19 15:01:50', 1),
+(31, 'Pantalones', 'rOJOS', 'portada_categoria.png', '2022-10-19 15:02:45', 1);
 
 -- --------------------------------------------------------
 
@@ -73,6 +101,18 @@ CREATE TABLE `detalle_temp` (
   `cantidad` int(11) NOT NULL,
   `token` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `imagen`
+--
+
+CREATE TABLE `imagen` (
+  `id` bigint(20) NOT NULL,
+  `productoid` bigint(20) NOT NULL,
+  `img` varchar(100) COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -154,24 +194,24 @@ INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VA
 (88, 11, 4, 0, 0, 0, 0),
 (89, 11, 5, 0, 0, 0, 0),
 (90, 11, 5, 0, 0, 0, 0),
-(162, 3, 1, 1, 0, 0, 0),
-(163, 3, 2, 0, 0, 0, 0),
-(164, 3, 3, 0, 0, 0, 0),
-(165, 3, 4, 0, 0, 0, 0),
-(166, 3, 5, 0, 0, 0, 0),
-(167, 3, 6, 0, 0, 0, 0),
 (426, 2, 1, 1, 0, 0, 0),
 (427, 2, 2, 1, 1, 1, 1),
 (428, 2, 3, 0, 0, 0, 0),
 (429, 2, 4, 0, 0, 0, 0),
 (430, 2, 5, 0, 0, 0, 0),
 (431, 2, 6, 0, 0, 0, 0),
-(456, 1, 1, 1, 0, 0, 0),
-(457, 1, 2, 1, 1, 1, 1),
-(458, 1, 3, 1, 1, 1, 1),
-(459, 1, 4, 1, 0, 0, 0),
-(460, 1, 5, 1, 0, 0, 0),
-(461, 1, 6, 1, 1, 1, 1);
+(498, 1, 1, 1, 0, 0, 0),
+(499, 1, 2, 1, 1, 1, 1),
+(500, 1, 3, 1, 1, 1, 1),
+(501, 1, 4, 1, 1, 0, 0),
+(502, 1, 5, 1, 0, 0, 0),
+(503, 1, 6, 1, 1, 1, 1),
+(504, 3, 1, 1, 0, 0, 0),
+(505, 3, 2, 0, 0, 0, 0),
+(506, 3, 3, 0, 0, 0, 0),
+(507, 3, 4, 1, 1, 0, 0),
+(508, 3, 5, 0, 0, 0, 0),
+(509, 3, 6, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -212,11 +252,13 @@ INSERT INTO `persona` (`idpersona`, `identificacion`, `nombres`, `apellidos`, `t
 (13, '5555', 'Cars', 'Perez', 232323, 'car@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '', '', '', '', 1, '2022-10-10 13:29:00', 1),
 (14, '343434', 'Edede', 'Sffsf', 46464, 'benha@info.com', 'a1fb4e703a9ef1fa4936801721ff285a97ac85330856674412e054892afe6972', '1235', 'benja', 'me', '', 7, '2022-10-12 10:52:05', 0),
 (15, '1323232', 'Javier', 'Sanchez', 232323, 'javi@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '121212', 'Javier', 'Zacatelco', '', 7, '2022-10-13 12:40:40', 0),
-(16, '23232', 'Andy', 'To', 22326, 'andy@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'dede', 'Andyt', 'ocotlan', '', 7, '2022-10-13 12:42:21', 1),
+(16, '23232', 'Andy', 'To', 22326, 'andy@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'dede', 'Andyt', 'ocotlan', '', 3, '2022-10-13 12:42:21', 1),
 (17, '232323', 'VITC', 'Torres', 23232, 'vico@gamail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'CF', 'vitod', 'utxl', '', 7, '2022-10-13 13:01:18', 1),
 (18, '77777', 'EdedeDEDE', 'EDEDE', 23232, 'aaaaa@gmail.com', '0177ff8cc29c4dc5fdd5f361e8264a22bdc4bc04a9b8071e586b84ebeb57d3b6', '23232', 'dadd', 'jjj', '', 7, '2022-10-13 13:04:42', 1),
 (19, '6454', 'Ximena', 'Vergara', 2384578, 'xime@gmai.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '777', 'XimenaVC', 'La Aurora', '', 7, '2022-10-13 13:09:42', 1),
-(20, '1931116308', 'Victor Ignacio', 'Perez Garcia', 2147483647, 'zankaha99@gmail.com', '270411258fcab1c3e3aa98f44d38123c04f430cd147004f71de0a44561326cfe', '90195', 'Perez', 'Mariano Matamoros', '', 7, '2022-10-13 13:53:13', 1);
+(20, '1931116308', 'Victor Ignacio', 'Perez Garcia', 2147483647, 'zankaha99@gmail.com', '270411258fcab1c3e3aa98f44d38123c04f430cd147004f71de0a44561326cfe', '90195', 'Perez', 'Mariano Matamoros', '', 7, '2022-10-13 13:53:13', 1),
+(21, '159644', 'Juan Carlos', 'Cote', 23232, 'coterie3334c@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '15289666666', 'Eric', 'Calle 45656', '', 7, '2022-10-17 15:02:19', 0),
+(22, '789600', 'Jusrr', 'Benitez', 246274, 'juanno9@gmail.com', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '242424', 'Juanddaldl', 'utpx', '', 7, '2022-10-17 15:06:17', 1);
 
 -- --------------------------------------------------------
 
@@ -236,6 +278,13 @@ CREATE TABLE `producto` (
   `datecreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`idproducto`, `categoriaid`, `codigo`, `nombre`, `descripcion`, `precio`, `stock`, `imagen`, `datecreated`, `status`) VALUES
+(1, 1, '12345', 'Producto 1', '<p>Descripcion producto 1</p> <table style=\"border-collapse: collapse; width: 100%;\" border=\"1\"> <tbody> <tr> <td style=\"width: 47.9392%;\">Nuemro&nbsp;</td> <td style=\"width: 47.9392%;\">Descripcion</td> </tr> <tr> <td style=\"width: 47.9392%;\">Uno</td> <td style=\"width: 47.9392%;\">Peque&ntilde;o</td> </tr> <tr> <td style=\"width: 47.9392%;\">Dos</td> <td style=\"width: 47.9392%;\">Mediano</td> </tr> <tr> <td style=\"width: 47.9392%;\">Tres</td> <td style=\"width: 47.9392%;\">Grande</td> </tr> </tbody> </table>', '150.00', 150, '', '2022-10-20 11:30:59', 1);
 
 -- --------------------------------------------------------
 
@@ -293,6 +342,13 @@ ALTER TABLE `detalle_temp`
   ADD KEY `productoid` (`productoid`);
 
 --
+-- Indices de la tabla `imagen`
+--
+ALTER TABLE `imagen`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `productoid` (`productoid`);
+
+--
 -- Indices de la tabla `modulo`
 --
 ALTER TABLE `modulo`
@@ -341,47 +397,62 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idcategoria` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idcategoria` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
 --
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `detalle_temp`
 --
 ALTER TABLE `detalle_temp`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `imagen`
+--
+ALTER TABLE `imagen`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `modulo`
 --
 ALTER TABLE `modulo`
   MODIFY `idmodulo` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
   MODIFY `idpedido` bigint(20) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=462;
+  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=510;
+
 --
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idproducto` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `idproducto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
   MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- Restricciones para tablas volcadas
 --
@@ -398,6 +469,12 @@ ALTER TABLE `detalle_pedido`
 --
 ALTER TABLE `detalle_temp`
   ADD CONSTRAINT `detalle_temp_ibfk_1` FOREIGN KEY (`productoid`) REFERENCES `producto` (`idproducto`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `imagen`
+--
+ALTER TABLE `imagen`
+  ADD CONSTRAINT `imagen_ibfk_1` FOREIGN KEY (`productoid`) REFERENCES `producto` (`idproducto`);
 
 --
 -- Filtros para la tabla `pedido`
