@@ -25,9 +25,9 @@
 			$this->views->getView($this,"productos",$data);
 		}
 
-		/*public function getProductos()
+		public function getProductos()
 		{
-			if($_SESSION['permisosMod']['r']){
+			//if($_SESSION['permisosMod']['r']){
 				$arrData = $this->model->selectProductos();
 				for ($i=0; $i < count($arrData); $i++) {
 					$btnView = '';
@@ -54,12 +54,14 @@
 					$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 				}
 				echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
-			}
+			//}
 			die();
-		}*/
+		}
 
-		/*public function setProducto(){
+		public function setProducto(){
 			if($_POST){
+                dep($_POST);
+                die();
 				if(empty($_POST['txtNombre']) || empty($_POST['txtCodigo']) || empty($_POST['listCategoria']) || empty($_POST['txtPrecio']) || empty($_POST['listStatus']) )
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
@@ -116,7 +118,7 @@
 				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 			}
 			die();
-		}*/
+		}
 
 		/*public function getProducto($idproducto){
 			if($_SESSION['permisosMod']['r']){

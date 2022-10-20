@@ -2,7 +2,7 @@
 
 	class ProductosModel extends Mysql
 	{
-		/*private $intIdProducto;
+		private $intIdProducto;
 		private $strNombre;
 		private $strDescripcion;
 		private $intCodigo;
@@ -10,14 +10,14 @@
 		private $intPrecio;
 		private $intStock;
 		private $intStatus;
-		private $strImagen;*/
+		private $strImagen;
 
 		public function __construct()
 		{
 			parent::__construct();
 		}
 
-		/*public function selectProductos(){
+		public function selectProductos(){
 			$sql = "SELECT p.idproducto,
 							p.codigo,
 							p.nombre,
@@ -33,7 +33,7 @@
 					WHERE p.status != 0 ";
 					$request = $this->select_all($sql);
 			return $request;
-		}*/	
+		}
 
 		/*public function insertProducto(string $nombre, string $descripcion, int $codigo, int $categoriaid, string $precio, int $stock, int $status){
 			$this->strNombre = $nombre;
