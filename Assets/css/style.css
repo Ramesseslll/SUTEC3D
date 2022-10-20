@@ -24,9 +24,14 @@
 	background: #007bff;
 	color: #FFF;
 }
-.notBlock{
-	display: none;
+.textcenter{
+	text-align: center;
 }
+
+.bootstrap-select > .dropdown-toggle{
+	border: 1px solid #CCC;
+}
+
 .required{
 	color: red;
 	font-size: 13pt;

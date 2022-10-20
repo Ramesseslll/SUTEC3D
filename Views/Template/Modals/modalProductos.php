@@ -29,7 +29,7 @@
                         <label class="control-label">Código <span class="required">*</span></label>
                         <input class="form-control" id="txtCodigo" name="txtCodigo" type="text" placeholder="Código de barra" required="">
                         <br>
-                        <div id="divBarCode" class="notblock textcenter">
+                        <div id="divBarCode" class="notBlock textcenter">
                             <div id="printCode">
                                 <svg id="barcode"></svg> 
                             </div>

@@ -164,7 +164,7 @@
 			die();
 		}
 
-		/*public function getSelectCategorias(){
+		public function getSelectCategorias(){ //metodo para extraer las categorias en los produtos
 			$htmlOptions = "";
 			$arrData = $this->model->selectCategorias();
 			if(count($arrData) > 0 ){
@@ -176,7 +176,7 @@
 			}
 			echo $htmlOptions;
 			die();	
-		}*/
+		}
 
 	}
 
