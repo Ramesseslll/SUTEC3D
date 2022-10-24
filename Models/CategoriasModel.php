@@ -46,7 +46,7 @@
 			$request = $this->select_all($sql);
 			return $request;
 		}
-       
+
 		public function selectCategoria(int $idcategoria){
 			$this->intIdcategoria = $idcategoria;
 			$sql = "SELECT * FROM categoria
@@ -54,7 +54,7 @@
 			$request = $this->select($sql);
 			return $request;
 		}
-        
+
 		public function updateCategoria(int $idcategoria, string $categoria, string $descripcion, string $portada, int $status){
 			$this->intIdcategoria = $idcategoria;
 			$this->strCategoria = $categoria;
@@ -78,7 +78,7 @@
 			}
 		    return $request;			
 		}
-        
+
 		public function deleteCategoria(int $idcategoria)
 		{
 			$this->intIdcategoria = $idcategoria;
@@ -99,7 +99,7 @@
 				$request = 'exist';
 			}
 			return $request;
-		}
+		}	
 
 
 	}

@@ -1,5 +1,6 @@
-let tableClientes;
+let tableClientes; 
 let rowTable = "";
+let divLoading = document.querySelector("#divLoading");
 document.addEventListener('DOMContentLoaded', function(){
 
     tableClientes = $('#tableClientes').dataTable( {
@@ -9,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function(){
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "ajax":{
-            "url": " "+base_url+"/Clientes/getClientes", //cambiar ruta
+            "url": " "+base_url+"/Clientes/getClientes",
             "dataSrc":""
         },
         "columns":[
@@ -51,8 +52,6 @@ document.addEventListener('DOMContentLoaded', function(){
         "order":[[0,"desc"]]  
     });
 
-    
-
 	if(document.querySelector("#formCliente")){
         let formCliente = document.querySelector("#formCliente");
         formCliente.onsubmit = function(e) {
@@ -80,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     return false;
                 } 
             } 
+            divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
             let ajaxUrl = base_url+'/Clientes/setCliente'; 
             let formData = new FormData(formCliente);
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function(){
                         swal("Error", objData.msg , "error");
                     }
                 }
-                
+                divLoading.style.display = "none";
                 return false;
             }
         }
@@ -115,6 +115,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 }, false);
+
 
 function fntViewInfo(idpersona){
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
@@ -124,7 +125,6 @@ function fntViewInfo(idpersona){
     request.onreadystatechange = function(){
         if(request.readyState == 4 && request.status == 200){
             let objData = JSON.parse(request.responseText);
-
             if(objData.status)
             {
                 document.querySelector("#celIdentificacion").innerHTML = objData.data.identificacion;
@@ -141,7 +141,7 @@ function fntViewInfo(idpersona){
                 swal("Error", objData.msg , "error");
             }
         }
-    } 
+    }
 }
 
 function fntEditInfo(element, idpersona){

@@ -67,13 +67,12 @@
     }
 
     function sessionUser(int $idpersona){
-
         require_once ("Models/LoginModel.php");
         $objLogin = new LoginModel();
         $request = $objLogin->sessionLogin($idpersona);
         return $request;
     }
-    
+
     function uploadImage(array $data, string $name){
         $url_temp = $data['tmp_name'];
         $destino    = 'Assets/images/uploads/'.$name;        
@@ -84,7 +83,7 @@
     function deleteFile(string $name){
         unlink('Assets/images/uploads/'.$name);
     }
-    
+
     //Elimina exceso de espacios entre palabras
     function strClean($strCadena){
         $string = preg_replace(['/\s+/','/^\s|\s$/'],[' ',''], $strCadena);

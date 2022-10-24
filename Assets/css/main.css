@@ -66,7 +66,7 @@ body {
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #255281;
+  color: #212529;
   text-align: left;
   background-color: #FFF;
 }
@@ -162,7 +162,7 @@ sup {
 }
 
 a {
-  color: #00A6D4;
+  color: #009688;
   text-decoration: none;
   background-color: transparent;
 }
@@ -2619,8 +2619,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #FFF;
-  background-color: #00A6D4;
-  border-color: #00A6D4;
+  background-color: #009688;
+  border-color: #009688;
 }
 
 .btn-primary:hover {
@@ -5246,8 +5246,8 @@ input[type="button"].btn-block {
 .page-item.active .page-link {
   z-index: 1;
   color: #FFF;
-  background-color: #00a6d4;
-  border-color: #00a6d4;
+  background-color: #009688;
+  border-color: #009688;
 }
 
 .page-item.disabled .page-link {
@@ -14821,12 +14821,12 @@ be a descendant of the grid when it is being dragged.
 
 ::-moz-selection {
   color: #FFF;
-  background-color: #00A6D4;
+  background-color: #00635a;
 }
 
 ::selection {
   color: #FFF;
-  background-color: #00A6D4;
+  background-color: #00635a;
 }
 
 @media (min-width: 768px) {
@@ -14922,7 +14922,7 @@ be a descendant of the grid when it is being dragged.
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background-color: #00A6D4;
+  background-color: #009688;
   z-index: 1030;
   padding-right: 15px;
 }
@@ -14959,7 +14959,7 @@ be a descendant of the grid when it is being dragged.
             flex: 0 0 auto;
     display: block;
     width: 230px;
-    background-color: #00A6D4;
+    background-color: #007d71;
   }
 }
 
@@ -14993,7 +14993,7 @@ be a descendant of the grid when it is being dragged.
 
 .app-sidebar__toggle:focus, .app-sidebar__toggle:hover {
   color: #fff;
-  background-color: #00d4c6;
+  background-color: #00635a;
   text-decoration: none;
 }
 
@@ -15883,7 +15883,7 @@ be a descendant of the grid when it is being dragged.
 
 .material-half-bg {
   height: 100vh;
-  background-color: #0277BD; /*azul fuerte login*/
+  background-color: #e7e7e7;
   position: fixed;
   top: 0;
   left: 0;
@@ -15893,7 +15893,7 @@ be a descendant of the grid when it is being dragged.
 }
 
 .material-half-bg .cover {
-  background-color: #E1F5FE; /*azul bajo login*/
+  background-color: #009688;
   height: 50vh;
 }
 
@@ -16634,7 +16634,7 @@ be a descendant of the grid when it is being dragged.
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  background-image: url(http://placeimg.com/1200/300/nature);
+  background-image: url(../images/banner.jpg);
   background-size: cover;
   background-position: center;
   min-height: 300px;

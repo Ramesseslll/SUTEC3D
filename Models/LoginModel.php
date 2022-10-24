@@ -12,11 +12,11 @@
 			parent::__construct();
 		}	
 
-        public function loginUser(string $usuario, string $password)
+		public function loginUser(string $usuario, string $password)
 		{
 			$this->strUsuario = $usuario;
 			$this->strPassword = $password;
-			 $sql = "SELECT idpersona,status FROM persona WHERE 
+			$sql = "SELECT idpersona,status FROM persona WHERE 
 					email_user = '$this->strUsuario' and 
 					password = '$this->strPassword' and 
 					status != 0 ";
@@ -24,7 +24,7 @@
 			return $request;
 		}
 
-        public function sessionLogin(int $iduser){
+		public function sessionLogin(int $iduser){
 			$this->intIdUsuario = $iduser;
 			//BUSCAR ROLE 
 			$sql = "SELECT p.idpersona,
@@ -47,7 +47,7 @@
 			return $request;
 		}
 
-        public function getUserEmail(string $strEmail){
+		public function getUserEmail(string $strEmail){
 			$this->strUsuario = $strEmail;
 			$sql = "SELECT idpersona,nombres,apellidos,status FROM persona WHERE 
 					email_user = '$this->strUsuario' and  
@@ -56,7 +56,7 @@
 			return $request;
 		}
 
-        public function setTokenUser(int $idpersona, string $token){
+		public function setTokenUser(int $idpersona, string $token){
 			$this->intIdUsuario = $idpersona;
 			$this->strToken = $token;
 			$sql = "UPDATE persona SET token = ? WHERE idpersona = $this->intIdUsuario ";
@@ -65,7 +65,7 @@
 			return $request;
 		}
 
-        public function getUsuario(string $email, string $token){
+		public function getUsuario(string $email, string $token){
 			$this->strUsuario = $email;
 			$this->strToken = $token;
 			$sql = "SELECT idpersona FROM persona WHERE 
@@ -75,7 +75,8 @@
 			$request = $this->select($sql);
 			return $request;
 		}
-        public function insertPassword(int $idPersona, string $password){
+
+		public function insertPassword(int $idPersona, string $password){
 			$this->intIdUsuario = $idPersona;
 			$this->strPassword = $password;
 			$sql = "UPDATE persona SET password = ?, token = ? WHERE idpersona = $this->intIdUsuario ";

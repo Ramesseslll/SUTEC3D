@@ -8,6 +8,7 @@
 			if(empty($_SESSION['login']))
 			{
 				header('Location: '.base_url().'/login');
+				die();
 			}
 			getPermisos(6);
 		}
@@ -25,8 +26,7 @@
 		}
 
 		public function setCategoria(){
-		
-            if($_POST){
+			if($_POST){
 				if(empty($_POST['txtNombre']) || empty($_POST['txtDescripcion']) || empty($_POST['listStatus']) )
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
@@ -164,7 +164,7 @@
 			die();
 		}
 
-		public function getSelectCategorias(){ //metodo para extraer las categorias en los produtos
+		public function getSelectCategorias(){
 			$htmlOptions = "";
 			$arrData = $this->model->selectCategorias();
 			if(count($arrData) > 0 ){

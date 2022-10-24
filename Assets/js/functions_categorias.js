@@ -1,8 +1,9 @@
 let tableCategorias;
 let rowTable = "";
+let divLoading = document.querySelector("#divLoading");
 document.addEventListener('DOMContentLoaded', function(){
 
-       tableCategorias = $('#tableCategorias').dataTable( {
+    tableCategorias = $('#tableCategorias').dataTable( {
         "aProcessing":true,
         "aServerSide":true,
         "language": {
@@ -106,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function(){
             swal("Atención", "Todos los campos son obligatorios." , "error");
             return false;
         }
-        
+        divLoading.style.display = "flex";
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         let ajaxUrl = base_url+'/Categorias/setCategoria'; 
         let formData = new FormData(formCategoria);
@@ -134,12 +135,11 @@ document.addEventListener('DOMContentLoaded', function(){
                     formCategoria.reset();
                     swal("Categoria", objData.msg ,"success");
                     removePhoto();
-                    tableCategorias.api().ajax.reload(); //refrescar la tabla
                 }else{
                     swal("Error", objData.msg , "error");
                 }              
             } 
-            
+            divLoading.style.display = "none";
             return false;
         }
     }
@@ -147,7 +147,6 @@ document.addEventListener('DOMContentLoaded', function(){
 }, false);
 
 function fntViewInfo(idcategoria){
-
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url+'/Categorias/getCategoria/'+idcategoria;
     request.open("GET",ajaxUrl,true);
@@ -165,7 +164,6 @@ function fntViewInfo(idcategoria){
                 document.querySelector("#celDescripcion").innerHTML = objData.data.descripcion;
                 document.querySelector("#celEstado").innerHTML = estado;
                 document.querySelector("#imgCategoria").innerHTML = '<img src="'+objData.data.url_portada+'"></img>';
-
                 $('#modalViewCategoria').modal('show');
             }else{
                 swal("Error", objData.msg , "error");
@@ -224,10 +222,9 @@ function fntEditInfo(element,idcategoria){
 }
 
 function fntDelInfo(idcategoria){
-    
     swal({
         title: "Eliminar Categoría",
-        text: "¿Realmente quiere eliminar la categoría?",
+        text: "¿Realmente quiere eliminar al categoría?",
         type: "warning",
         showCancelButton: true,
         confirmButtonText: "Si, eliminar!",

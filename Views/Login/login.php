@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Victor">
+    <meta name="author" content="Victor Ignacio Perez Garcia">
     <meta name="theme-color" content="#00A6D4">
     <link rel="shortcut icon" href="<?= media();?>/images/sutec-logo2.ico">
     <!-- Main CSS-->
@@ -22,7 +22,6 @@
         <center><h1><a href="<?= base_url(); ?>/dashboard"><img class="" src="<?= media();?>/images/uploads/Logo2.png" width="235" height="111" alt=""></a> </h1></center>
       </div>
       <div class="login-box">
-
 
         <form class="login-form" name="formLogin" id="formLogin" action="">
           <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>INICIAR SESIÓN</h3>

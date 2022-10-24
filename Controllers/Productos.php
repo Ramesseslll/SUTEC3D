@@ -27,7 +27,7 @@
 
 		public function getProductos()
 		{
-			//if($_SESSION['permisosMod']['r']){
+			if($_SESSION['permisosMod']['r']){
 				$arrData = $this->model->selectProductos();
 				for ($i=0; $i < count($arrData); $i++) {
 					$btnView = '';
@@ -54,7 +54,7 @@
 					$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 				}
 				echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
-			//}
+			}
 			die();
 		}
 
@@ -73,12 +73,12 @@
 					$strPrecio = strClean($_POST['txtPrecio']);
 					$intStock = intval($_POST['txtStock']);
 					$intStatus = intval($_POST['listStatus']);
-					//$request_producto = "";
+					$request_producto = "";
 
 					if($idProducto == 0)
 					{
 						$option = 1;
-						//if($_SESSION['permisosMod']['w']){
+						if($_SESSION['permisosMod']['w']){
 							$request_producto = $this->model->insertProducto($strNombre, 
 																		$strDescripcion, 
 																		$strCodigo, 
@@ -86,10 +86,10 @@
 																		$strPrecio, 
 																		$intStock, 
 																		$intStatus );
-						//}
+						}
 					}else{
 						$option = 2;
-						/*if($_SESSION['permisosMod']['u']){
+						if($_SESSION['permisosMod']['u']){
 							$request_producto = $this->model->updateProducto($idProducto,
 																		$strNombre,
 																		$strDescripcion, 
@@ -98,14 +98,14 @@
 																		$strPrecio, 
 																		$intStock, 
 																		$intStatus);
-						}*/
+						}
 					}
 					if($request_producto > 0 )
 					{
 						if($option == 1){
 							$arrResponse = array('status' => true, 'idproducto' => $request_producto, 'msg' => 'Datos guardados correctamente.');
 						}else{
-							//$arrResponse = array('status' => true, 'idproducto' => $idProducto, 'msg' => 'Datos Actualizados correctamente.');
+							$arrResponse = array('status' => true, 'idproducto' => $idProducto, 'msg' => 'Datos Actualizados correctamente.');
 						}
 					}else if($request_producto == 'exist'){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! ya existe un producto con el Código Ingresado.');		
@@ -118,7 +118,7 @@
 			die();
 		}
 
-		/*public function getProducto($idproducto){
+		public function getProducto($idproducto){
 			if($_SESSION['permisosMod']['r']){
 				$idproducto = intval($idproducto);
 				if($idproducto > 0){
@@ -139,9 +139,9 @@
 				}
 			}
 			die();
-		}*/
+		}
 
-		/*public function setImage(){
+		public function setImage(){
 			if($_POST){
 				if(empty($_POST['idproducto'])){
 					$arrResponse = array('status' => false, 'msg' => 'Error de dato.');
@@ -160,9 +160,9 @@
 				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 			}
 			die();
-		}*/
+		}
 
-		/*public function delFile(){
+		public function delFile(){
 			if($_POST){
 				if(empty($_POST['idproducto']) || empty($_POST['file'])){
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
@@ -182,9 +182,9 @@
 				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 			}
 			die();
-		}*/
+		}
 
-		/*public function delProducto(){
+		public function delProducto(){
 			if($_POST){
 				if($_SESSION['permisosMod']['d']){
 					$intIdproducto = intval($_POST['idProducto']);
@@ -199,7 +199,7 @@
 				}
 			}
 			die();
-		}*/
+		}
 	}
 
  ?>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<title>Solicitud de cambio de contraseña</title>
+	<title>Recuperar cuenta</title>
 	<style type="text/css">
 		p{
 			font-family: arial;
@@ -91,10 +91,10 @@
 			<tr>
 				<td>
 					<div class="x_sgwrap">
-						<p>¡Hola, <?= $data['nombreUsuario']; ?>!</p>
+						<p>Hola <?= $data['nombreUsuario']; ?></p>
 					</div>
 					<p>Solicitud de acceso para el usuario: <strong><?= $data['email']; ?></strong></p>
-					<p>Has solicitado los datos de tu cuenta, accede al enlace de abajo para reestablecer tu contraseña. </p>
+					<p>Has solicitado los datos de tu usuario, accede al enlace de abajo para confirmar tu contraseña. </p>
 					<p class="x_text_white">
 					<a href="<?= $data['url_recovery']; ?>" target="_blank" class="x_button_link x_link_blue">Confirmar datos</a>
 					</p>

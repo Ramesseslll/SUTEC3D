@@ -64,15 +64,11 @@
 					ON p.moduloid = m.idmodulo
 					WHERE p.rolid = $this->intRolid";
 			$request = $this->select_all($sql);
-			
 			$arrPermisos = array();
 			for ($i=0; $i < count($request); $i++) { 
 				$arrPermisos[$request[$i]['moduloid']] = $request[$i];
 			}
 			return $arrPermisos;
 		}
-		
 	}
-
-
  ?>

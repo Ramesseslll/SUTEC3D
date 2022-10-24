@@ -5,14 +5,13 @@
 		{
 			parent::__construct();
 			session_start();
-			//session_regenerate_id(true);
+			session_regenerate_id(true);
 			if(empty($_SESSION['login']))
 			{
 				header('Location: '.base_url().'/login');
+				die();
 			}
-			getPermisos(2); //numero 2 para redireccionar de permisos a dashboard
-			
-			
+			getPermisos(2);
 		}
 
 		public function Roles()
@@ -128,7 +127,7 @@
 					$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
 				}
 				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
-			}	
+			}
 			die();
 		}
 

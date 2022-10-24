@@ -3,6 +3,7 @@ $('.login-content [data-toggle="flip"]').click(function() {
 	return false;
 });
 
+var divLoading = document.querySelector("#divLoading");
 document.addEventListener('DOMContentLoaded', function(){
 	if(document.querySelector("#formLogin")){
 		let formLogin = document.querySelector("#formLogin");
@@ -14,16 +15,16 @@ document.addEventListener('DOMContentLoaded', function(){
 
 			if(strEmail == "" || strPassword == "")
 			{
-				swal("Por favor", "Escribe usuario y contraseña.", "error");
+				swal("Por favor", "Escribe usuario y contraseñaa.", "error");
 				return false;
 			}else{
-				
+				divLoading.style.display = "flex";
 				var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
 				var ajaxUrl = base_url+'/Login/loginUser'; 
 				var formData = new FormData(formLogin);
 				request.open("POST",ajaxUrl,true);
 				request.send(formData);
-                request.onreadystatechange = function(){
+				request.onreadystatechange = function(){
 					if(request.readyState != 4) return;
 					if(request.status == 200){
 						var objData = JSON.parse(request.responseText);
@@ -37,14 +38,14 @@ document.addEventListener('DOMContentLoaded', function(){
 					}else{
 						swal("Atención","Error en el proceso", "error");
 					}
-					
+					divLoading.style.display = "none";
 					return false;
 				}
-            }
+			}
 		}
 	}
 
-    if(document.querySelector("#formRecetPass")){		
+	if(document.querySelector("#formRecetPass")){		
 		let formRecetPass = document.querySelector("#formRecetPass");
 		formRecetPass.onsubmit = function(e) {
 			e.preventDefault();
@@ -55,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				swal("Por favor", "Escribe tu correo electrónico.", "error");
 				return false;
 			}else{
-				
+				divLoading.style.display = "flex";
 				var request = (window.XMLHttpRequest) ? 
 								new XMLHttpRequest() : 
 								new ActiveXObject('Microsoft.XMLHTTP');
@@ -88,13 +89,14 @@ document.addEventListener('DOMContentLoaded', function(){
 					}else{
 						swal("Atención","Error en el proceso", "error");
 					}
+					divLoading.style.display = "none";
 					return false;
 				}	
 			}
 		}
 	}
 
-    if(document.querySelector("#formCambiarPass")){
+	if(document.querySelector("#formCambiarPass")){
 		let formCambiarPass = document.querySelector("#formCambiarPass");
 		formCambiarPass.onsubmit = function(e) {
 			e.preventDefault();
@@ -115,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function(){
 					swal("Atención", "Las contraseñas no son iguales." , "error");
 					return false;
 				}
-				
+				divLoading.style.display = "flex";
 				var request = (window.XMLHttpRequest) ? 
 							new XMLHttpRequest() : 
 							new ActiveXObject('Microsoft.XMLHTTP');
@@ -146,11 +148,10 @@ document.addEventListener('DOMContentLoaded', function(){
 					}else{
 						swal("Atención","Error en el proceso", "error");
 					}
-					
+					divLoading.style.display = "none";
 				}
 			}
 		}
 	}
-
 
 }, false);

@@ -8,7 +8,7 @@
 
 	//Datos de conexión a Base de Datos
 	const DB_HOST = "localhost";
-	const DB_NAME = "vi_db";
+	const DB_NAME = "tivi";
 	const DB_USER = "root";
 	const DB_PASSWORD = "";
 	const DB_CHARSET = "utf8";
@@ -26,6 +26,12 @@
 	const EMAIL_REMITENTE = "no-reply@sutec3d.com";
 	const NOMBRE_EMPESA = "SUTEC 3D";
 	const WEB_EMPRESA = "www.sutec3d.com";
+
+	
+
+
+
+	
 
 
  ?>

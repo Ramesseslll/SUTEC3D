@@ -4,9 +4,11 @@
 		public function __construct()
 		{
 			session_start();
-            if(isset($_SESSION['login']))
+			session_regenerate_id(true);
+			if(isset($_SESSION['login']))
 			{
 				header('Location: '.base_url().'/dashboard');
+				die();
 			}
 			parent::__construct();
 		}
@@ -20,8 +22,8 @@
 			$this->views->getView($this,"login",$data);
 		}
 
-        public function loginUser(){
-			
+		public function loginUser(){
+			//dep($_POST);
 			if($_POST){
 				if(empty($_POST['txtEmail']) || empty($_POST['txtPassword'])){
 					$arrResponse = array('status' => false, 'msg' => 'Error de datos' );
@@ -29,32 +31,28 @@
 					$strUsuario  =  strtolower(strClean($_POST['txtEmail']));
 					$strPassword = hash("SHA256",$_POST['txtPassword']);
 					$requestUser = $this->model->loginUser($strUsuario, $strPassword);
-                    if(empty($requestUser)){
+					if(empty($requestUser)){
 						$arrResponse = array('status' => false, 'msg' => 'El usuario o la contraseña es incorrecto.' ); 
 					}else{
 						$arrData = $requestUser;
 						if($arrData['status'] == 1){
 							$_SESSION['idUser'] = $arrData['idpersona'];
 							$_SESSION['login'] = true;
-							//$_SESSION['timeout'] = true;	
-                            //$_SESSION['inicio'] = time(); 
-							
-                            $arrData = $this->model->sessionLogin($_SESSION['idUser']);
-							sessionUser($_SESSION['idUser']);
-							//$_SESSION['userData']= $arrData;
+
+							$arrData = $this->model->sessionLogin($_SESSION['idUser']);
+							sessionUser($_SESSION['idUser']);							
 							$arrResponse = array('status' => true, 'msg' => 'ok');
 						}else{
 							$arrResponse = array('status' => false, 'msg' => 'Usuario inactivo.');
 						}
-                    }
+					}
 				}
-			
-                echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
-            }
-            die();
-        }    
-		
-        public function resetPass(){
+				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+			}
+			die();
+		}
+
+		public function resetPass(){
 			if($_POST){
 				error_reporting(0);
 
@@ -74,36 +72,34 @@
 						$url_recovery = base_url().'/login/confirmUser/'.$strEmail.'/'.$token;
 						$requestUpdate = $this->model->setTokenUser($idpersona,$token);
 
-                        $dataUsuario = array('nombreUsuario' => $nombreUsuario,
+						$dataUsuario = array('nombreUsuario' => $nombreUsuario,
 											 'email' => $strEmail,
 											 'asunto' => 'Recuperar cuenta - '.NOMBRE_REMITENTE,
 											 'url_recovery' => $url_recovery);
-                                             $sendEmail = sendEmail($dataUsuario,'email_cambioPassword');
-                                             if($requestUpdate){
-                    
-                                                if($sendEmail){
-                                                    $arrResponse = array('status' => true, 
-                                                                     'msg' => 'Se ha enviado un email a tu cuenta de correo para cambiar tu contraseña.');
-                                                }else{
-                                                    $arrResponse = array('status' => false, 
-                                                                     'msg' => 'No es posible realizar el proceso, intenta más tarde.' );
-                                                }
-                                            }else{
-                                                $arrResponse = array('status' => false, 
-                                                                     'msg' => 'No es posible realizar el proceso, intenta más tarde.' );
-                                            }
-						
+						if($requestUpdate){
+							$sendEmail = sendEmail($dataUsuario,'email_cambioPassword');
+
+							if($sendEmail){
+								$arrResponse = array('status' => true, 
+												 'msg' => 'Se ha enviado un email a tu cuenta de correo para cambiar tu contraseña.');
+							}else{
+								$arrResponse = array('status' => false, 
+												 'msg' => 'No es posible realizar el proceso, intenta más tarde.' );
+							}
+						}else{
+							$arrResponse = array('status' => false, 
+												 'msg' => 'No es posible realizar el proceso, intenta más tarde.' );
+						}
 					}
 				}
-
 				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 			}
 			die();
 		}
 
-        public function confirmUser(string $params){
+		public function confirmUser(string $params){
 
-            if(empty($params)){
+			if(empty($params)){
 				header('Location: '.base_url());
 			}else{
 				$arrParams = explode(',',$params);
@@ -126,7 +122,7 @@
 			die();
 		}
 
-        public function setPassword(){
+		public function setPassword(){
 
 			if(empty($_POST['idUsuario']) || empty($_POST['txtEmail']) || empty($_POST['txtToken']) || empty($_POST['txtPassword']) || empty($_POST['txtPasswordConfirm'])){
 
@@ -164,8 +160,6 @@
 			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 			die();
 		}
-
-        
 
 	}
  ?>

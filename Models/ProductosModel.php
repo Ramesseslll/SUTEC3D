@@ -33,7 +33,7 @@
 					WHERE p.status != 0 ";
 					$request = $this->select_all($sql);
 			return $request;
-		}
+		}	
 
 		public function insertProducto(string $nombre, string $descripcion, int $codigo, int $categoriaid, string $precio, int $stock, int $status){
 			$this->strNombre = $nombre;
@@ -44,7 +44,7 @@
 			$this->intStock = $stock;
 			$this->intStatus = $status;
 			$return = 0;
-			$sql = "SELECT * FROM producto WHERE codigo = $this->intCodigo";
+			$sql = "SELECT * FROM producto WHERE codigo = '{$this->intCodigo}'";
 			$request = $this->select_all($sql);
 			if(empty($request))
 			{
@@ -71,8 +71,7 @@
 	        return $return;
 		}
 
-		
-		/*public function updateProducto(int $idproducto, string $nombre, string $descripcion, int $codigo, int $categoriaid, string $precio, int $stock, int $status){
+		public function updateProducto(int $idproducto, string $nombre, string $descripcion, int $codigo, int $categoriaid, string $precio, int $stock, int $status){
 			$this->intIdProducto = $idproducto;
 			$this->strNombre = $nombre;
 			$this->strDescripcion = $descripcion;
@@ -109,10 +108,9 @@
 				$return = "exist";
 			}
 	        return $return;
-		}*/	
+		}
 
-		
-		/*public function selectProducto(int $idproducto){
+		public function selectProducto(int $idproducto){
 			$this->intIdProducto = $idproducto;
 			$sql = "SELECT p.idproducto,
 							p.codigo,
@@ -130,10 +128,9 @@
 			$request = $this->select($sql);
 			return $request;
 
-		}*/	
+		}
 
-		
-		/*public function insertImage(int $idproducto, string $imagen){
+		public function insertImage(int $idproducto, string $imagen){
 			$this->intIdProducto = $idproducto;
 			$this->strImagen = $imagen;
 			$query_insert  = "INSERT INTO imagen(productoid,img) VALUES(?,?)";
@@ -141,20 +138,18 @@
         					$this->strImagen);
 	        $request_insert = $this->insert($query_insert,$arrData);
 	        return $request_insert;
-		}*/	
+		}
 
-		
-		/*public function selectImages(int $idproducto){
+		public function selectImages(int $idproducto){
 			$this->intIdProducto = $idproducto;
 			$sql = "SELECT productoid,img
 					FROM imagen
 					WHERE productoid = $this->intIdProducto";
 			$request = $this->select_all($sql);
 			return $request;
-		}*/	
+		}
 
-		
-		/*public function deleteImage(int $idproducto, string $imagen){
+		public function deleteImage(int $idproducto, string $imagen){
 			$this->intIdProducto = $idproducto;
 			$this->strImagen = $imagen;
 			$query  = "DELETE FROM imagen 
@@ -162,15 +157,14 @@
 						AND img = '{$this->strImagen}'";
 	        $request_delete = $this->delete($query);
 	        return $request_delete;
-		}*/	
+		}
 
-		
-		/*public function deleteProducto(int $idproducto){
+		public function deleteProducto(int $idproducto){
 			$this->intIdProducto = $idproducto;
 			$sql = "UPDATE producto SET status = ? WHERE idproducto = $this->intIdProducto ";
 			$arrData = array(0);
 			$request = $this->update($sql,$arrData);
 			return $request;
-		}*/	
+		}
 	}
  ?>

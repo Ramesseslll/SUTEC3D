@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Victor">
+    <meta name="author" content="Abel OSH">
     <meta name="theme-color" content="#009688">
     <link rel="shortcut icon" href="<?= media();?>/images/sutec-logo2.ico">
     <!-- Main CSS-->
@@ -22,6 +22,11 @@
         <h1><?= $data['page_title']; ?></h1>
       </div>
       <div class="login-box flipped">
+        <div id="divLoading" >
+          <div>
+            <img src="<?= media(); ?>/images/loading.svg" alt="Loading">
+          </div>
+        </div>
         <form id="formCambiarPass" name="formCambiarPass" class="forget-form" action="">
           <input type="hidden" id="idUsuario" name="idUsuario" value="<?= $data['idpersona']; ?>" required >
           <input type="hidden" id="txtEmail" name="txtEmail" value="<?= $data['email']; ?>" required >

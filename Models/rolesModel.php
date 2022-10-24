@@ -11,6 +11,7 @@
 		{
 			parent::__construct();
 		}
+
 		public function selectRoles()
 		{
 			$whereAdmin = "";
@@ -25,7 +26,6 @@
 
 		public function selectRol(int $idrol)
 		{
-			
 			//BUSCAR ROLE
 			$this->intIdrol = $idrol;
 			$sql = "SELECT * FROM rol WHERE idrol = $this->intIdrol";

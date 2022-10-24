@@ -9,6 +9,7 @@ class Clientes extends Controllers{
 		if(empty($_SESSION['login']))
 		{
 			header('Location: '.base_url().'/login');
+			die();
 		}
 		getPermisos(3);
 	}
@@ -25,7 +26,7 @@ class Clientes extends Controllers{
 		$this->views->getView($this,"clientes",$data);
 	}
 
-public function setCliente(){
+	public function setCliente(){
 		error_reporting(0);
 		if($_POST){
 			if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['txtNit']) || empty($_POST['txtNombreFiscal']) || empty($_POST['txtDirFiscal']) )
@@ -125,20 +126,19 @@ public function setCliente(){
 		die();
 	}
 
-//Ver clientes
 	public function getCliente($idpersona){
-	if($_SESSION['permisosMod']['r']){
-		$idusuario = intval($idpersona);
-		if($idusuario > 0)
-		{
-			$arrData = $this->model->selectCliente($idusuario);
-			if(empty($arrData))
+		if($_SESSION['permisosMod']['r']){
+			$idusuario = intval($idpersona);
+			if($idusuario > 0)
 			{
+				$arrData = $this->model->selectCliente($idusuario);
+				if(empty($arrData))
+				{
 					$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
-			}else{
+				}else{
 					$arrResponse = array('status' => true, 'data' => $arrData);
-			}
-			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+				}
+				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 			}
 		}
 		die();
@@ -161,6 +161,8 @@ public function setCliente(){
 		}
 		die();
 	}
+
+
 
 }
 
